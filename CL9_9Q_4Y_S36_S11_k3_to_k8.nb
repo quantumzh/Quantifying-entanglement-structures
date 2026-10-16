@@ -1,0 +1,3637 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[    151339,       3629]
+NotebookOptionsPosition[    146743,       3542]
+NotebookOutlinePosition[    147149,       3559]
+CellTagsIndexPosition[    147106,       3556]
+WindowTitle->CL9 4Y S36 S11 and k separability
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["CL9 9Q | S36 LEFT / RIGHT | Pauli rows and 10 repetitions", "Title",ExpressionUUID->"a8f90798-86ab-42a6-9627-4fad6c4bd3ec"],
+
+Cell["\<\
+Self-contained notebook. 1=X, 2=Y, 3=Z. Measured file basis_measurement0.txt \
+corresponds to Mathematica row 1. The first user-provided list contains EIGHT \
+Ys, not six. S36 supports d=1,2,3,4; h=1 is the default. LEFT and RIGHT are \
+computed separately. Exact experimental numbers require local files.\
+\>", "Text",ExpressionUUID->"5fa88eef-b7db-4061-85e8-5df4b15631ed"],
+
+Cell[CellGroupData[{
+
+Cell["1. Store Pauli measurement mapping and CL9 four pairs", "Section",ExpressionUUID->"ba2753ac-01a5-4a0e-b7f9-306c17c0d611"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\n", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"ClearAll", "[", "\"\<Global`*\>\"", "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"n", "=", "9"}], ";", " ", 
+    RowBox[{"h", "=", "1"}], ";", " ", 
+    RowBox[{"j", "=", "4"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"rowsByY", "=", 
+     RowBox[{"<|", 
+      RowBox[{
+       RowBox[{"2", "->", 
+        RowBox[{"{", 
+         RowBox[{
+         "2", ",", "3", ",", "4", ",", "6", ",", "7", ",", "8", ",", "10", 
+          ",", "11", ",", "12", ",", "14", ",", "19", ",", "20", ",", "21", 
+          ",", "23", ",", "28", ",", "40", ",", "41", ",", "42", ",", "44", 
+          ",", "49", ",", "58", ",", "79", ",", "80", ",", "81", ",", "83", 
+          ",", "88", ",", "97", ",", "118", ",", "157", ",", "158", ",", 
+          "159", ",", "161", ",", "166", ",", "175", ",", "196", ",", "235"}],
+          "}"}]}], ",", 
+       RowBox[{"4", "->", 
+        RowBox[{"{", 
+         RowBox[{
+         "9", ",", "13", ",", "15", ",", "16", ",", "17", ",", "22", ",", 
+          "24", ",", "25", ",", "26", ",", "29", ",", "30", ",", "31", ",", 
+          "33", ",", "34", ",", "35", ",", "43", ",", "45", ",", "46", ",", 
+          "47", ",", "50", ",", "51", ",", "52", ",", "54", ",", "55", ",", 
+          "56", ",", "59", ",", "60", ",", "61", ",", "63", ",", "64", ",", 
+          "65", ",", "67", ",", "68", ",", "69", ",", "71", ",", "82", ",", 
+          "84", ",", "85", ",", "86", ",", "89", ",", "90", ",", "91", ",", 
+          "93", ",", "94", ",", "95", ",", "98", ",", "99", ",", "100", ",", 
+          "102", ",", "103", ",", "104", ",", "106", ",", "107", ",", "108", 
+          ",", "110", ",", "119", ",", "120", ",", "121", ",", "123", ",", 
+          "124", ",", "125", ",", "127", ",", "128", ",", "129", ",", "131", 
+          ",", "136", ",", "137", ",", "138", ",", "140", ",", "145", ",", 
+          "160", ",", "162", ",", "163", ",", "164", ",", "167", ",", "168", 
+          ",", "169", ",", "171", ",", "172", ",", "173", ",", "176", ",", 
+          "177", ",", "178", ",", "180", ",", "181", ",", "182", ",", "184", 
+          ",", "185", ",", "186", ",", "188", ",", "197", ",", "198", ",", 
+          "199", ",", "201", ",", "202", ",", "203", ",", "205", ",", "206", 
+          ",", "207", ",", "209", ",", "214", ",", "215", ",", "216", ",", 
+          "218", ",", "223", ",", "236", ",", "237", ",", "238", ",", "240", 
+          ",", "241", ",", "242", ",", "244", ",", "245", ",", "246", ",", 
+          "248", ",", "253", ",", "254", ",", "255", ",", "257", ",", "262", 
+          ",", "274", ",", "275", ",", "276", ",", "278", ",", "283", ",", 
+          "292"}], "}"}]}], ",", 
+       RowBox[{"6", "->", 
+        RowBox[{"{", 
+         RowBox[{
+         "36", ",", "57", ",", "66", ",", "70", ",", "72", ",", "73", ",", 
+          "74", ",", "96", ",", "105", ",", "109", ",", "111", ",", "112", 
+          ",", "113", ",", "126", ",", "130", ",", "132", ",", "133", ",", 
+          "134", ",", "139", ",", "141", ",", "142", ",", "143", ",", "146", 
+          ",", "147", ",", "148", ",", "150", ",", "151", ",", "152", ",", 
+          "174", ",", "183", ",", "187", ",", "189", ",", "190", ",", "191", 
+          ",", "204", ",", "208", ",", "210", ",", "211", ",", "212", ",", 
+          "217", ",", "219", ",", "220", ",", "221", ",", "224", ",", "225", 
+          ",", "226", ",", "228", ",", "229", ",", "230", ",", "243", ",", 
+          "247", ",", "249", ",", "250", ",", "251", ",", "256", ",", "258", 
+          ",", "259", ",", "260", ",", "263", ",", "264", ",", "265", ",", 
+          "267", ",", "268", ",", "269", ",", "277", ",", "279", ",", "280", 
+          ",", "281", ",", "284", ",", "285", ",", "286", ",", "288", ",", 
+          "289", ",", "290", ",", "293", ",", "294", ",", "295", ",", "297", 
+          ",", "298", ",", "299", ",", "301", ",", "302", ",", "303", ",", 
+          "305"}], "}"}]}], ",", 
+       RowBox[{"8", "->", 
+        RowBox[{"{", 
+         RowBox[{
+         "153", ",", "231", ",", "270", ",", "291", ",", "300", ",", "304", 
+          ",", "306", ",", "307", ",", "308"}], "}"}]}]}], "|>"}]}], ";"}], 
+   "\n", 
+   RowBox[{
+    RowBox[{"pauliCodes", "=", 
+     RowBox[{"Association", "@", 
+      RowBox[{"Table", "[", "\n", "  ", 
+       RowBox[{
+        RowBox[{"yy", "->", 
+         RowBox[{"Sort", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"ReplacePart", "[", 
+             RowBox[{
+              RowBox[{"ConstantArray", "[", 
+               RowBox[{"1", ",", "n"}], "]"}], ",", "\n", "     ", 
+              RowBox[{"Thread", "[", 
+               RowBox[{"#", "->", 
+                RowBox[{"ConstantArray", "[", 
+                 RowBox[{"2", ",", "yy"}], "]"}]}], "]"}]}], "]"}], "&"}], "/@", 
+           RowBox[{"Subsets", "[", 
+            RowBox[{
+             RowBox[{"Range", "[", "n", "]"}], ",", 
+             RowBox[{"{", "yy", "}"}]}], "]"}]}], "]"}]}], ",", "\n", "  ", 
+        RowBox[{"{", 
+         RowBox[{"yy", ",", 
+          RowBox[{"{", 
+           RowBox[{"2", ",", "4", ",", "6", ",", "8"}], "}"}]}], "}"}]}], 
+       "]"}]}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"rowCodes", "=", 
+     RowBox[{"Association", "[", 
+      RowBox[{"Flatten", "[", 
+       RowBox[{
+        RowBox[{"Table", "[", "\n", " ", 
+         RowBox[{
+          RowBox[{"Thread", "[", 
+           RowBox[{
+            RowBox[{"rowsByY", "[", "yy", "]"}], "->", 
+            RowBox[{"pauliCodes", "[", "yy", "]"}]}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"yy", ",", 
+            RowBox[{"{", 
+             RowBox[{"2", ",", "4", ",", "6", ",", "8"}], "}"}]}], "}"}]}], 
+         "]"}], ",", "1"}], "]"}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"rowCodes", "[", "1", "]"}], "=", 
+     RowBox[{"ConstantArray", "[", 
+      RowBox[{"1", ",", "9"}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"rowCodes", "[", "340", "]"}], "=", 
+     RowBox[{"ConstantArray", "[", 
+      RowBox[{"3", ",", "9"}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"!", 
+        RowBox[{"And", "@@", 
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"Length", "[", 
+             RowBox[{"rowsByY", "[", "k", "]"}], "]"}], "==", 
+            RowBox[{"Binomial", "[", 
+             RowBox[{"9", ",", "k"}], "]"}]}], ",", 
+           RowBox[{"{", 
+            RowBox[{"k", ",", 
+             RowBox[{"{", 
+              RowBox[{"2", ",", "4", ",", "6", ",", "8"}], "}"}]}], "}"}]}], 
+          "]"}]}]}], "||", "\n", " ", 
+       RowBox[{"!", 
+        RowBox[{"DuplicateFreeQ", "[", 
+         RowBox[{"Flatten", "[", 
+          RowBox[{"Values", "[", "rowsByY", "]"}], "]"}], "]"}]}], "||", "\n",
+        " ", 
+       RowBox[{"!", 
+        RowBox[{"DuplicateFreeQ", "[", 
+         RowBox[{"Values", "[", "rowCodes", "]"}], "]"}]}]}], ",", 
+      RowBox[{
+       RowBox[{"Print", "[", "\"\<Pauli mapping error\>\"", "]"}], ";", 
+       RowBox[{"Abort", "[", "]"}]}]}], "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"stateStrings", "=", 
+     RowBox[{"{", 
+      RowBox[{
+      "\"\<000000000\>\"", ",", "\"\<000000111\>\"", ",", "\"\<000111011\>\"",
+        ",", "\"\<000111100\>\"", ",", "\n", " ", "\"\<111000011\>\"", ",", 
+       "\"\<111000100\>\"", ",", "\"\<111111000\>\"", ",", 
+       "\"\<111111111\>\""}], "}"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"toBits", "[", "s_String", "]"}], ":=", 
+     RowBox[{"ToExpression", "/@", 
+      RowBox[{"Characters", "[", "s", "]"}]}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"states", "=", 
+     RowBox[{"toBits", "/@", "stateStrings"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"omega", "=", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"states", "[", 
+        RowBox[{"[", "#", "]"}], "]"}], "&"}], "/@", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"1", ",", "8"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"2", ",", "7"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"3", ",", "6"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"4", ",", "5"}], "}"}]}], "}"}]}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"ms", "=", 
+     RowBox[{"omega", "[", 
+      RowBox[{"[", 
+       RowBox[{"All", ",", "1"}], "]"}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{"\"\<Pauli row counts: \>\"", ",", 
+      RowBox[{"Length", "/@", "rowsByY"}]}], "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{"\"\<Four pairs: \>\"", ",", 
+      RowBox[{"omega", "//", "InputForm"}]}], "]"}], ";"}], "\n"}]}]], "Input",
+ CellLabel->
+  "In[624]:=",ExpressionUUID->"f51a8516-f0ac-4891-9c6a-3beee6890b9b"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Pauli row counts: \"\>", "\[InvisibleSpace]", 
+   RowBox[{"\[LeftAssociation]", 
+    RowBox[{
+     RowBox[{"2", "\[Rule]", "36"}], ",", 
+     RowBox[{"4", "\[Rule]", "126"}], ",", 
+     RowBox[{"6", "\[Rule]", "84"}], ",", 
+     RowBox[{"8", "\[Rule]", "9"}]}], "\[RightAssociation]"}]}],
+  SequenceForm["Pauli row counts: ", 
+   Association[2 -> 36, 4 -> 126, 6 -> 84, 8 -> 9]],
+  Editable->False]], "Print",
+ CellChangeTimes->{4.001158834407304*^9},
+ CellLabel->
+  "\:6b63\:5728\:8ba1\:7b97In[624]:=",ExpressionUUID->"19838fa0-88f0-4776-\
+b077-373739b32eee"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Four pairs: \"\>", "\[InvisibleSpace]", 
+   InterpretationBox[
+    StyleBox[
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+          "0", ",", " ", "0", ",", " ", "0", ",", " ", "0", ",", " ", "0", 
+           ",", " ", "0", ",", " ", "0", ",", " ", "0", ",", " ", "0"}], 
+          "}"}], ",", " ", 
+         RowBox[{"{", 
+          RowBox[{
+          "1", ",", " ", "1", ",", " ", "1", ",", " ", "1", ",", " ", "1", 
+           ",", " ", "1", ",", " ", "1", ",", " ", "1", ",", " ", "1"}], 
+          "}"}]}], "}"}], ",", " ", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+          "0", ",", " ", "0", ",", " ", "0", ",", " ", "0", ",", " ", "0", 
+           ",", " ", "0", ",", " ", "1", ",", " ", "1", ",", " ", "1"}], 
+          "}"}], ",", " ", 
+         RowBox[{"{", 
+          RowBox[{
+          "1", ",", " ", "1", ",", " ", "1", ",", " ", "1", ",", " ", "1", 
+           ",", " ", "1", ",", " ", "0", ",", " ", "0", ",", " ", "0"}], 
+          "}"}]}], "}"}], ",", " ", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+          "0", ",", " ", "0", ",", " ", "0", ",", " ", "1", ",", " ", "1", 
+           ",", " ", "1", ",", " ", "0", ",", " ", "1", ",", " ", "1"}], 
+          "}"}], ",", " ", 
+         RowBox[{"{", 
+          RowBox[{
+          "1", ",", " ", "1", ",", " ", "1", ",", " ", "0", ",", " ", "0", 
+           ",", " ", "0", ",", " ", "1", ",", " ", "0", ",", " ", "0"}], 
+          "}"}]}], "}"}], ",", " ", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+          "0", ",", " ", "0", ",", " ", "0", ",", " ", "1", ",", " ", "1", 
+           ",", " ", "1", ",", " ", "1", ",", " ", "0", ",", " ", "0"}], 
+          "}"}], ",", " ", 
+         RowBox[{"{", 
+          RowBox[{
+          "1", ",", " ", "1", ",", " ", "1", ",", " ", "0", ",", " ", "0", 
+           ",", " ", "0", ",", " ", "0", ",", " ", "1", ",", " ", "1"}], 
+          "}"}]}], "}"}]}], "}"}],
+     ShowStringCharacters->True,
+     NumberMarks->True],
+    InputForm[{{{0, 0, 0, 0, 0, 0, 0, 0, 0}, {1, 1, 1, 1, 1, 1, 1, 1, 1}}, {{
+     0, 0, 0, 0, 0, 0, 1, 1, 1}, {1, 1, 1, 1, 1, 1, 0, 0, 0}}, {{0, 0, 0, 1, 
+     1, 1, 0, 1, 1}, {1, 1, 1, 0, 0, 0, 1, 0, 0}}, {{0, 0, 0, 1, 1, 1, 1, 0, 
+     0}, {1, 1, 1, 0, 0, 0, 0, 1, 1}}}],
+    AutoDelete->True,
+    Editable->True]}],
+  SequenceForm["Four pairs: ", 
+   InputForm[{{{0, 0, 0, 0, 0, 0, 0, 0, 0}, {1, 1, 1, 1, 1, 1, 1, 1, 1}}, {{0,
+     0, 0, 0, 0, 0, 1, 1, 1}, {1, 1, 1, 1, 1, 1, 0, 0, 0}}, {{0, 0, 0, 1, 1, 
+    1, 0, 1, 1}, {1, 1, 1, 0, 0, 0, 1, 0, 0}}, {{0, 0, 0, 1, 1, 1, 1, 0, 0}, {
+    1, 1, 1, 0, 0, 0, 0, 1, 1}}}]],
+  Editable->False]], "Print",
+ CellChangeTimes->{4.0011588344132876`*^9},
+ CellLabel->
+  "\:6b63\:5728\:8ba1\:7b97In[624]:=",ExpressionUUID->"252c829b-4e64-486e-\
+a0a5-4cac0bc3890d"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["2. Read 341 measured settings for each of 10 repetitions", "Section",ExpressionUUID->"71cd0b7b-53cf-4230-a2d1-869826698de2"],
+
+Cell[BoxData[
+ RowBox[{"\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"IMPORTANT", ":", " ", 
+     RowBox[{
+     "replace", " ", "folders", " ", "with", " ", "the", " ", "ten", " ", 
+      "ACTUAL", " ", "separate", " ", 
+      RowBox[{"folders", ".", "\n", "   ", "Originally"}], " ", "all", " ", 
+      "ten", " ", "paths", " ", "were", " ", "rep0"}]}], ",", " ", 
+    RowBox[{"which", " ", "would", " ", "duplicate", " ", 
+     RowBox[{"data", "."}]}]}], " ", "*)"}], "\n", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+    "baseDir", "=", 
+     "\"\<E:\\\\Detection of k partite \
+entanglement\\\\Experimental_special_bases\\\\9qcluster_special_bases\\\\\
+special_bases\>\""}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"folders", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"FileNameJoin", "[", 
+        RowBox[{"{", 
+         RowBox[{"baseDir", ",", 
+          RowBox[{"\"\<rep\>\"", "<>", 
+           RowBox[{"ToString", "[", "k", "]"}]}], ",", "\n", " ", 
+          "\"\<9Q_Cluster_1500ns\>\"", ",", "\"\<readout_cali\>\""}], "}"}], 
+        "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "0", ",", "9"}], "}"}]}], "]"}]}], ";"}], "\n", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Edit", " ", 
+     RowBox[{"folders", "[", 
+      RowBox[{"[", "k", "]"}], "]"}], " ", "if", " ", "the", " ", "actual", 
+     " ", "repetition", " ", "folder", " ", 
+     RowBox[{"differs", "."}]}], " ", "*)"}], "\n", 
+   RowBox[{
+    RowBox[{"ClearAll", "[", 
+     RowBox[{"loadRep", ",", "probabilities", ",", "correlators"}], "]"}], 
+    ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"loadRep", "[", "folder_String", "]"}], ":=", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"files", ",", "missing"}], "}"}], ",", "\n", " ", 
+       RowBox[{
+        RowBox[{"files", "=", 
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"FileNameJoin", "[", 
+            RowBox[{"{", 
+             RowBox[{"folder", ",", 
+              RowBox[{"\"\<basis_measurement\>\"", "<>", 
+               RowBox[{"ToString", "[", "t", "]"}], "<>", "\"\<.txt\>\""}]}], 
+             "}"}], "]"}], ",", "\n", "   ", 
+           RowBox[{"{", 
+            RowBox[{"t", ",", "0", ",", "340"}], "}"}]}], "]"}]}], ";", "\n", 
+        " ", 
+        RowBox[{"missing", "=", 
+         RowBox[{"Select", "[", 
+          RowBox[{"files", ",", 
+           RowBox[{
+            RowBox[{"!", 
+             RowBox[{"FileExistsQ", "[", "#", "]"}]}], "&"}]}], "]"}]}], ";", 
+        "\n", " ", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"missing", "=!=", 
+           RowBox[{"{", "}"}]}], ",", 
+          RowBox[{"Return", "[", 
+           RowBox[{"Failure", "[", 
+            RowBox[{"\"\<MissingFiles\>\"", ",", "\n", "  ", 
+             RowBox[{"<|", 
+              RowBox[{
+               RowBox[{"\"\<Folder\>\"", "->", "folder"}], ",", 
+               RowBox[{"\"\<MissingCount\>\"", "->", 
+                RowBox[{"Length", "[", "missing", "]"}]}], ",", "\n", "    ", 
+               RowBox[{"\"\<FirstMissing\>\"", "->", 
+                RowBox[{"First", "[", "missing", "]"}]}]}], "|>"}]}], "]"}], 
+           "]"}]}], "]"}], ";", "\n", " ", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Import", "[", 
+           RowBox[{"#", ",", "\"\<Table\>\""}], "]"}], "&"}], "/@", 
+         "files"}]}]}], "]"}]}], ";"}], "\n", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+      "Qubit", " ", "1", " ", "is", " ", "LSB", " ", "of", " ", "the", " ", 
+       "outcome", " ", "number", " ", "x"}], "-", "1"}], ",", " ", 
+     RowBox[{"as", " ", "in", " ", 
+      RowBox[{"user", "'"}], "s", " ", "nested", " ", 
+      RowBox[{"loops", "."}]}]}], " ", "*)"}], "\n", 
+   RowBox[{
+    RowBox[{"paritySigns", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"-", "1"}], ")"}], "^", 
+        RowBox[{"DigitCount", "[", 
+         RowBox[{"x", ",", "2", ",", "1"}], "]"}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"x", ",", "0", ",", "511"}], "}"}]}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"probabilities", "[", "measure_List", "]"}], ":=", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", "v", "}"}], ",", "\n", " ", 
+       RowBox[{
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{"Length", "[", "measure", "]"}], "!=", "512"}], "||", 
+           RowBox[{"!", 
+            RowBox[{"And", "@@", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{"Length", "[", "#", "]"}], ">=", "1"}], "&"}], "/@", 
+               "measure"}], ")"}]}]}]}], ",", "\n", "  ", 
+          RowBox[{"Return", "[", 
+           RowBox[{"Failure", "[", 
+            RowBox[{"\"\<WrongOutcomeCount\>\"", ",", 
+             RowBox[{"<|", "|>"}]}], "]"}], "]"}]}], "]"}], ";", "\n", " ", 
+        RowBox[{"v", "=", 
+         RowBox[{"N", "[", 
+          RowBox[{"measure", "[", 
+           RowBox[{"[", 
+            RowBox[{"All", ",", "1"}], "]"}], "]"}], "]"}]}], ";", "\n", " ", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"!", 
+            RowBox[{"VectorQ", "[", 
+             RowBox[{"v", ",", "NumericQ"}], "]"}]}], "||", 
+           RowBox[{
+            RowBox[{"Min", "[", "v", "]"}], "<", "0"}], "||", 
+           RowBox[{
+            RowBox[{"Total", "[", "v", "]"}], "<=", "0"}]}], ",", "\n", "  ", 
+          RowBox[{"Return", "[", 
+           RowBox[{"Failure", "[", 
+            RowBox[{"\"\<BadProbabilities\>\"", ",", 
+             RowBox[{"<|", "|>"}]}], "]"}], "]"}]}], "]"}], ";", "\n", " ", 
+        RowBox[{"v", "/", 
+         RowBox[{"Total", "[", "v", "]"}]}]}]}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"correlators", "[", "block_List", "]"}], ":=", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", "p", "}"}], ",", "\n", " ", 
+       RowBox[{
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Length", "[", "block", "]"}], "!=", "341"}], ",", 
+          RowBox[{"Return", "[", 
+           RowBox[{"Failure", "[", 
+            RowBox[{"\"\<WrongSettingCount\>\"", ",", 
+             RowBox[{"<|", "|>"}]}], "]"}], "]"}]}], "]"}], ";", "\n", " ", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"p", "=", 
+            RowBox[{"probabilities", "[", 
+             RowBox[{"block", "[", 
+              RowBox[{"[", "r", "]"}], "]"}], "]"}]}], ";", "\n", "  ", 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"Head", "[", "p", "]"}], "===", "Failure"}], ",", 
+             RowBox[{"Return", "[", "p", "]"}]}], "]"}], ";", "\n", "  ", 
+           RowBox[{"paritySigns", ".", "p"}]}], ",", 
+          RowBox[{"{", 
+           RowBox[{"r", ",", "1", ",", "341"}], "}"}]}], "]"}]}]}], "]"}]}], 
+    ";"}], "\n", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Row", " ", "340", " ", "corresponds", " ", "to", " ", 
+     RowBox[{"basis_measurement339", ".", "txt"}], " ", "and", " ", 
+     RowBox[{"Z", "^", "9."}], "\n", "   ", "This", " ", "distribution", " ", 
+     "is", " ", "indexed", " ", "Q1", " ", "as", " ", "the", " ", "least", 
+     " ", "significant", " ", 
+     RowBox[{"bit", "."}]}], " ", "*)"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"computationalProbabilities", "[", "block_List", "]"}], ":=", 
+     RowBox[{"probabilities", "[", 
+      RowBox[{"block", "[", 
+       RowBox[{"[", "340", "]"}], "]"}], "]"}]}], ";"}], "\n"}]}]], "Input",
+ CellLabel->
+  "In[639]:=",ExpressionUUID->"95bb430d-d106-4283-a6b3-a3988b701c54"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["3. Signed W4^9 and the measured LEFT numerator", "Section",ExpressionUUID->"dcb2f887-6357-423a-a117-96d97a708393"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\n", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"ClearAll", "[", 
+     RowBox[{
+     "signForCode", ",", "wFromCorrelations", ",", "allW", ",", "binIndex", 
+      ",", "pairPopulation", ",", "fPaper"}], "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"signForCode", "[", 
+      RowBox[{"m_List", ",", "code_List"}], "]"}], ":=", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"-", "1"}], ")"}], "^", 
+      RowBox[{"Total", "[", 
+       RowBox[{"Pick", "[", 
+        RowBox[{"m", ",", "code", ",", "2"}], "]"}], "]"}]}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"wFromCorrelations", "[", 
+      RowBox[{"m_List", ",", "jj_Integer", ",", "observations_List"}], "]"}], 
+     ":=", "\n", " ", 
+     RowBox[{"Total", "[", 
+      RowBox[{"MapThread", "[", "\n", "   ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"signForCode", "[", 
+           RowBox[{"m", ",", "#2"}], "]"}], "*", 
+          RowBox[{"observations", "[", 
+           RowBox[{"[", "#1", "]"}], "]"}]}], "&"}], ",", "\n", "   ", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"rowsByY", "[", "jj", "]"}], ",", 
+          RowBox[{"pauliCodes", "[", "jj", "]"}]}], "}"}]}], "]"}], "]"}]}], 
+    ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"allW", "[", 
+      RowBox[{"jj_Integer", ",", "observations_List"}], "]"}], ":=", "\n", 
+     " ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"wFromCorrelations", "[", 
+        RowBox[{"#", ",", "jj", ",", "observations"}], "]"}], "&"}], "/@", 
+      "ms"}]}], ";"}], "\n", 
+   RowBox[{"(*", " ", 
+    RowBox[{"x", "=", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"1", "+", 
+        RowBox[{"(", 
+         RowBox[{"i1", "-", "1"}], ")"}], "+", 
+        RowBox[{"2", 
+         RowBox[{"(", 
+          RowBox[{"i2", "-", "1"}], ")"}]}], "+"}], "..."}], "+", 
+      RowBox[{"256", 
+       RowBox[{"(", 
+        RowBox[{"i9", "-", "1"}], ")"}]}]}]}], " ", "*)"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"binIndex", "[", "b_List", "]"}], ":=", 
+     RowBox[{
+      RowBox[{"FromDigits", "[", 
+       RowBox[{
+        RowBox[{"Reverse", "[", "b", "]"}], ",", "2"}], "]"}], "+", "1"}]}], 
+    ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"pairPopulation", "[", "p_List", "]"}], ":=", 
+     RowBox[{"Total", "[", "\n", "  ", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Sqrt", "[", 
+         RowBox[{
+          RowBox[{"p", "[", 
+           RowBox[{"[", 
+            RowBox[{"binIndex", "[", 
+             RowBox[{"#", "[", 
+              RowBox[{"[", "1", "]"}], "]"}], "]"}], "]"}], "]"}], "*", 
+          RowBox[{"p", "[", 
+           RowBox[{"[", 
+            RowBox[{"binIndex", "[", 
+             RowBox[{"#", "[", 
+              RowBox[{"[", "2", "]"}], "]"}], "]"}], "]"}], "]"}]}], "]"}], 
+        "&"}], "/@", "omega"}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"fPaper", "[", 
+      RowBox[{"2", ",", "3"}], "]"}], "=", "1"}], ";", 
+    RowBox[{
+     RowBox[{"fPaper", "[", 
+      RowBox[{"2", ",", "4"}], "]"}], "=", "2"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"fPaper", "[", 
+       RowBox[{"2", ",", "k_Integer"}], "]"}], "/;", 
+      RowBox[{"k", ">=", "5"}]}], ":=", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"k", "-", "1"}], ")"}], 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"k", "-", "4"}], ")"}], "/", "2"}]}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"fPaper", "[", 
+      RowBox[{"3", ",", "5"}], "]"}], "=", "2"}], ";", 
+    RowBox[{
+     RowBox[{"fPaper", "[", 
+      RowBox[{"3", ",", "6"}], "]"}], "=", "4"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"fPaper", "[", 
+       RowBox[{"3", ",", "k_Integer"}], "]"}], "/;", 
+      RowBox[{"k", ">=", "7"}]}], ":=", 
+     RowBox[{"Sum", "[", 
+      RowBox[{
+       RowBox[{"fPaper", "[", 
+        RowBox[{"2", ",", "u"}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"u", ",", "6", ",", 
+         RowBox[{"k", "-", "1"}]}], "}"}]}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"fPaper", "[", 
+      RowBox[{"4", ",", "5"}], "]"}], "=", "3"}], ";", 
+    RowBox[{
+     RowBox[{"fPaper", "[", 
+      RowBox[{"4", ",", "6"}], "]"}], "=", "5"}], ";", 
+    RowBox[{
+     RowBox[{"fPaper", "[", 
+      RowBox[{"4", ",", "7"}], "]"}], "=", "10"}], ";", 
+    RowBox[{
+     RowBox[{"fPaper", "[", 
+      RowBox[{"4", ",", "8"}], "]"}], "=", "14"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"fPaper", "[", 
+       RowBox[{"4", ",", "k_Integer"}], "]"}], "/;", 
+      RowBox[{"k", ">=", "9"}]}], ":=", 
+     RowBox[{"Sum", "[", 
+      RowBox[{
+       RowBox[{"fPaper", "[", 
+        RowBox[{"3", ",", "u"}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"u", ",", "8", ",", 
+         RowBox[{"k", "-", "1"}]}], "}"}]}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{"\"\<f4(9) = \>\"", ",", 
+      RowBox[{"fPaper", "[", 
+       RowBox[{"4", ",", "9"}], "]"}], ",", "\"\<; Binomial[9,4] = \>\"", ",", 
+      RowBox[{"Binomial", "[", 
+       RowBox[{"9", ",", "4"}], "]"}]}], "]"}], ";"}], "\n"}]}]], "Input",
+ CellLabel->
+  "In[647]:=",ExpressionUUID->"603b0aad-2a7e-4a9d-bf13-8d25a8824b8a"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"f4(9) = \"\>", "\[InvisibleSpace]", "14", 
+   "\[InvisibleSpace]", "\<\"; Binomial[9,4] = \"\>", "\[InvisibleSpace]", 
+   "126"}],
+  SequenceForm["f4(9) = ", 14, "; Binomial[9,4] = ", 126],
+  Editable->False]], "Print",
+ CellChangeTimes->{4.001158839823329*^9},
+ CellLabel->
+  "\:6b63\:5728\:8ba1\:7b97In[647]:=",ExpressionUUID->"6d25afed-886a-468f-\
+bd0c-67e53f057759"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+4. Construct Gamma state-number pairs and Upsilon joint-number pairs \
+(Notation S3\[AHat]\.80\.93S6)\
+\>", "Section",ExpressionUUID->"d4be2f17-1282-41d2-b4e1-18ce58b7649d"],
+
+Cell["\<\
+For each chosen union B of 1..h blocks: swapping B produces a and b. Gamma \
+contains (a,1/2),(b,1/2), and Upsilon contains ((a,b),1). For a fixed \
+partition, all selected B and all Omega pairs are added. Different partitions \
+are merged by coefficientwise maximum. Crucially, Gamma contributes sum of \
+POPULATIONS p_a; Upsilon contributes sum of sqrt(p_a p_b). These must not be \
+interchanged.\
+\>", "Text",ExpressionUUID->"dc5cee14-8d03-4005-b2a5-af97622d8a6e"],
+
+Cell[BoxData[
+ RowBox[{"\n", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"ClearAll", "[", 
+     RowBox[{
+     "boundedPartitions", ",", "minPartitions", ",", "subsetChoices", ",", 
+      "partialSwap", ",", "\n", " ", "stateKey", ",", "jointKey", ",", 
+      "decodeState", ",", "decodeJoint", ",", "\n", " ", 
+      "gammaUpsilonForPartition", ",", "associationAdd", ",", 
+      "associationMax", ",", "\n", " ", "gammaD", ",", "upsilonD", ",", 
+      "refUpsilon", ",", "hatUpsilon", ",", "\n", " ", "cDh", ",", "epsGamma",
+       ",", "epsUpsilon"}], "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"boundedPartitions", "[", 
+      RowBox[{"0", ",", 
+       RowBox[{"d_Integer", "?", "Positive"}]}], "]"}], ":=", 
+     RowBox[{"{", 
+      RowBox[{"{", "}"}], "}"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"boundedPartitions", "[", 
+      RowBox[{
+       RowBox[{"nn_Integer", "?", "Positive"}], ",", 
+       RowBox[{"d_Integer", "?", "Positive"}]}], "]"}], ":=", "\n", " ", 
+     RowBox[{
+      RowBox[{"boundedPartitions", "[", 
+       RowBox[{"nn", ",", "d"}], "]"}], "=", 
+      RowBox[{"Module", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"prev", "=", 
+          RowBox[{"boundedPartitions", "[", 
+           RowBox[{
+            RowBox[{"nn", "-", "1"}], ",", "d"}], "]"}]}], "}"}], ",", "\n", 
+        " ", 
+        RowBox[{"Join", "[", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"Append", "[", 
+              RowBox[{"#", ",", 
+               RowBox[{"{", "nn", "}"}]}], "]"}], "&"}], "/@", "prev"}], 
+           ")"}], ",", "\n", " ", 
+          RowBox[{"Flatten", "[", 
+           RowBox[{
+            RowBox[{"Table", "[", 
+             RowBox[{
+              RowBox[{"If", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"Length", "[", 
+                  RowBox[{"q", "[", 
+                   RowBox[{"[", "k", "]"}], "]"}], "]"}], "<", "d"}], ",", 
+                "\n", "   ", 
+                RowBox[{"{", 
+                 RowBox[{"ReplacePart", "[", 
+                  RowBox[{"q", ",", 
+                   RowBox[{"k", "->", 
+                    RowBox[{"Append", "[", 
+                    RowBox[{
+                    RowBox[{"q", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], ",", "nn"}], "]"}]}]}], 
+                  "]"}], "}"}], ",", 
+                RowBox[{"{", "}"}]}], "]"}], ",", "\n", "   ", 
+              RowBox[{"{", 
+               RowBox[{"q", ",", "prev"}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"k", ",", 
+                RowBox[{"Length", "[", "q", "]"}]}], "}"}]}], "]"}], ",", 
+            "2"}], "]"}]}], "]"}]}], "]"}]}]}], ";"}], "\n", 
+   RowBox[{"(*", " ", 
+    RowBox[{"D", "*", 
+     RowBox[{"_d", ":", " ", 
+      RowBox[{
+      "partitions", " ", "with", " ", "the", " ", "minimal", " ", "number", 
+       " ", "of", " ", 
+       RowBox[{"blocks", "."}]}]}]}], " ", "*)"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"minPartitions", "[", 
+      RowBox[{"d_Integer", "?", "Positive"}], "]"}], ":=", "\n", " ", 
+     RowBox[{
+      RowBox[{"minPartitions", "[", "d", "]"}], "=", 
+      RowBox[{"Select", "[", 
+       RowBox[{
+        RowBox[{"boundedPartitions", "[", 
+         RowBox[{"9", ",", "d"}], "]"}], ",", "\n", "    ", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Length", "[", "#", "]"}], "==", 
+          RowBox[{"Ceiling", "[", 
+           RowBox[{"9", "/", "d"}], "]"}]}], "&"}]}], "]"}]}]}], ";"}], "\n", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+     RowBox[{"I_gamma", "^", 
+      RowBox[{"h", ":", " ", 
+       RowBox[{"choose", " ", "u", " ", "blocks"}]}]}], ",", " ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"for", " ", "1"}], "<=", "u", "<=", "h"}], ";", " ", 
+      RowBox[{"each", " ", "subset", " ", "is", " ", "ONE", " ", 
+       RowBox[{"B", "."}]}]}]}], " ", "*)"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"subsetChoices", "[", 
+      RowBox[{"part_List", ",", 
+       RowBox[{"hh_Integer", "?", "Positive"}]}], "]"}], ":=", "\n", " ", 
+     RowBox[{"Flatten", "[", 
+      RowBox[{
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"Flatten", "/@", 
+          RowBox[{"Subsets", "[", 
+           RowBox[{"part", ",", 
+            RowBox[{"{", "u", "}"}]}], "]"}]}], ",", "\n", "   ", 
+         RowBox[{"{", 
+          RowBox[{"u", ",", "1", ",", 
+           RowBox[{"Min", "[", 
+            RowBox[{"hh", ",", 
+             RowBox[{"Length", "[", "part", "]"}]}], "]"}]}], "}"}]}], "]"}], 
+       ",", "1"}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"partialSwap", "[", 
+      RowBox[{"pair_List", ",", "sites_List"}], "]"}], ":=", 
+     RowBox[{"Module", "[", "\n", " ", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"a", "=", 
+          RowBox[{"pair", "[", 
+           RowBox[{"[", "1", "]"}], "]"}]}], ",", 
+         RowBox[{"b", "=", 
+          RowBox[{"pair", "[", 
+           RowBox[{"[", "2", "]"}], "]"}]}], ",", "temp"}], "}"}], ",", "\n", 
+       " ", 
+       RowBox[{
+        RowBox[{"temp", "=", 
+         RowBox[{"a", "[", 
+          RowBox[{"[", "sites", "]"}], "]"}]}], ";", 
+        RowBox[{
+         RowBox[{"a", "[", 
+          RowBox[{"[", "sites", "]"}], "]"}], "=", 
+         RowBox[{"b", "[", 
+          RowBox[{"[", "sites", "]"}], "]"}]}], ";", "\n", " ", 
+        RowBox[{
+         RowBox[{"b", "[", 
+          RowBox[{"[", "sites", "]"}], "]"}], "=", "temp"}], ";", 
+        RowBox[{"{", 
+         RowBox[{"a", ",", "b"}], "}"}]}]}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"stateKey", "[", "s_List", "]"}], ":=", 
+     RowBox[{"StringJoin", "[", 
+      RowBox[{"ToString", "/@", "s"}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"jointKey", "[", "ab_List", "]"}], ":=", 
+     RowBox[{"StringRiffle", "[", 
+      RowBox[{
+       RowBox[{"stateKey", "/@", 
+        RowBox[{"Sort", "[", "ab", "]"}]}], ",", "\"\<|\>\""}], "]"}]}], 
+    ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"decodeState", "[", "k_String", "]"}], ":=", 
+     RowBox[{"toBits", "[", "k", "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"decodeJoint", "[", "k_String", "]"}], ":=", 
+     RowBox[{"toBits", "/@", 
+      RowBox[{"StringSplit", "[", 
+       RowBox[{"k", ",", "\"\<|\>\""}], "]"}]}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"associationAdd", "[", "arr_List", "]"}], ":=", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"keys", "=", 
+         RowBox[{"Union", "[", 
+          RowBox[{"Flatten", "[", 
+           RowBox[{"Keys", "/@", "arr"}], "]"}], "]"}]}], "}"}], ",", "\n", 
+       " ", 
+       RowBox[{"AssociationThread", "[", 
+        RowBox[{"keys", ",", "\n", "  ", 
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"Total", "[", 
+            RowBox[{"Lookup", "[", 
+             RowBox[{"arr", ",", "key", ",", "0"}], "]"}], "]"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"key", ",", "keys"}], "}"}]}], "]"}]}], "]"}]}], "]"}]}], 
+    ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"associationMax", "[", "arr_List", "]"}], ":=", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"keys", "=", 
+         RowBox[{"Union", "[", 
+          RowBox[{"Flatten", "[", 
+           RowBox[{"Keys", "/@", "arr"}], "]"}], "]"}]}], "}"}], ",", "\n", 
+       " ", 
+       RowBox[{"AssociationThread", "[", 
+        RowBox[{"keys", ",", "\n", "  ", 
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"Max", "[", 
+            RowBox[{"Lookup", "[", 
+             RowBox[{"arr", ",", "key", ",", "0"}], "]"}], "]"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"key", ",", "keys"}], "}"}]}], "]"}]}], "]"}]}], "]"}]}], 
+    ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"gammaUpsilonForPartition", "[", 
+      RowBox[{"part_List", ",", 
+       RowBox[{"hh_Integer", "?", "Positive"}]}], "]"}], ":=", "\n", " ", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"choices", "=", 
+          RowBox[{"subsetChoices", "[", 
+           RowBox[{"part", ",", "hh"}], "]"}]}], ",", "pairs", ",", 
+         "gEntries", ",", "uEntries"}], "}"}], ",", "\n", " ", 
+       RowBox[{
+        RowBox[{"pairs", "=", 
+         RowBox[{"Flatten", "[", 
+          RowBox[{
+           RowBox[{"Table", "[", 
+            RowBox[{
+             RowBox[{"partialSwap", "[", 
+              RowBox[{"ab", ",", "b"}], "]"}], ",", "\n", "     ", 
+             RowBox[{"{", 
+              RowBox[{"ab", ",", "omega"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"b", ",", "choices"}], "}"}]}], "]"}], ",", "1"}], 
+          "]"}]}], ";", "\n", " ", 
+        RowBox[{"gEntries", "=", 
+         RowBox[{"Flatten", "[", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"stateKey", "[", 
+                  RowBox[{"#", "[", 
+                   RowBox[{"[", "1", "]"}], "]"}], "]"}], "->", 
+                 RowBox[{"1", "/", "2"}]}], ",", "\n", "                   ", 
+                RowBox[{
+                 RowBox[{"stateKey", "[", 
+                  RowBox[{"#", "[", 
+                   RowBox[{"[", "2", "]"}], "]"}], "]"}], "->", 
+                 RowBox[{"1", "/", "2"}]}]}], "}"}], "&"}], "/@", "pairs"}], 
+            ")"}], ",", "1"}], "]"}]}], ";", "\n", " ", 
+        RowBox[{"uEntries", "=", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{"jointKey", "[", "#", "]"}], "->", "1"}], "&"}], "/@", 
+           "pairs"}], ")"}]}], ";", "\n", " ", 
+        RowBox[{"{", "\n", "  ", 
+         RowBox[{
+          RowBox[{"Merge", "[", 
+           RowBox[{"gEntries", ",", "Total"}], "]"}], ",", "\n", "  ", 
+          RowBox[{"Merge", "[", 
+           RowBox[{"uEntries", ",", "Total"}], "]"}]}], "\n", " ", "}"}]}]}], 
+      "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"gammaD", "[", 
+      RowBox[{
+       RowBox[{"d_Integer", "?", "Positive"}], ",", 
+       RowBox[{"hh_Integer", "?", "Positive"}]}], "]"}], ":=", "\n", " ", 
+     RowBox[{
+      RowBox[{"gammaD", "[", 
+       RowBox[{"d", ",", "hh"}], "]"}], "=", 
+      RowBox[{"associationMax", "[", "\n", "  ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"gammaUpsilonForPartition", "[", 
+            RowBox[{"#", ",", "hh"}], "]"}], "[", 
+           RowBox[{"[", "1", "]"}], "]"}], "&"}], "/@", 
+         RowBox[{"minPartitions", "[", "d", "]"}]}], ")"}], "]"}]}]}], ";"}], 
+   "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"upsilonD", "[", 
+      RowBox[{
+       RowBox[{"d_Integer", "?", "Positive"}], ",", 
+       RowBox[{"hh_Integer", "?", "Positive"}]}], "]"}], ":=", "\n", " ", 
+     RowBox[{
+      RowBox[{"upsilonD", "[", 
+       RowBox[{"d", ",", "hh"}], "]"}], "=", 
+      RowBox[{"associationMax", "[", "\n", "  ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"gammaUpsilonForPartition", "[", 
+            RowBox[{"#", ",", "hh"}], "]"}], "[", 
+           RowBox[{"[", "2", "]"}], "]"}], "&"}], "/@", 
+         RowBox[{"minPartitions", "[", "d", "]"}]}], ")"}], "]"}]}]}], ";"}], 
+   "\n", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"reference", " ", "Upsilon", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"1", "D"}], ",", " ", 
+         RowBox[{"Floor", "[", 
+          RowBox[{"N", "/", "2"}], "]"}]}], ")"}]}], ":", " ", 
+      RowBox[{"singleton", " ", "blocks"}]}], ",", " ", 
+     RowBox[{"up", " ", "to", " ", "four", " ", "chosen"}]}], " ", "*)"}], 
+   "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"refUpsilon", "[", "]"}], ":=", 
+     RowBox[{
+      RowBox[{"refUpsilon", "[", "]"}], "=", 
+      RowBox[{
+       RowBox[{"gammaUpsilonForPartition", "[", "\n", " ", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"{", "#", "}"}], "&"}], "/@", 
+           RowBox[{"Range", "[", "9", "]"}]}], ")"}], ",", 
+         RowBox[{"Floor", "[", 
+          RowBox[{"9", "/", "2"}], "]"}]}], "]"}], "[", 
+       RowBox[{"[", "2", "]"}], "]"}]}]}], ";"}], "\n", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+     RowBox[{"Set", " ", 
+      RowBox[{"difference", ":", " ", 
+       RowBox[{
+       "fully", " ", "remove", " ", "shared", " ", "pair", " ", "keys"}]}]}], 
+     ";", " ", 
+     RowBox[{"do", " ", "not", " ", "subtract", " ", "weights"}]}], " ", 
+    "*)"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"hatUpsilon", "[", 
+      RowBox[{
+       RowBox[{"d_Integer", "?", "Positive"}], ",", 
+       RowBox[{"hh_Integer", "?", "Positive"}]}], "]"}], ":=", "\n", " ", 
+     RowBox[{
+      RowBox[{"hatUpsilon", "[", 
+       RowBox[{"d", ",", "hh"}], "]"}], "=", 
+      RowBox[{"KeySelect", "[", 
+       RowBox[{
+        RowBox[{"refUpsilon", "[", "]"}], ",", "\n", "   ", 
+        RowBox[{
+         RowBox[{"!", 
+          RowBox[{"KeyExistsQ", "[", 
+           RowBox[{
+            RowBox[{"upsilonD", "[", 
+             RowBox[{"d", ",", "hh"}], "]"}], ",", "#"}], "]"}]}], "&"}]}], 
+       "]"}]}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"cDh", "[", 
+      RowBox[{
+       RowBox[{"d_Integer", "?", "Positive"}], ",", 
+       RowBox[{"hh_Integer", "?", "Positive"}]}], "]"}], ":=", "\n", " ", 
+     RowBox[{
+      RowBox[{"cDh", "[", 
+       RowBox[{"d", ",", "hh"}], "]"}], "=", 
+      RowBox[{"Min", "[", "\n", "  ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Sum", "[", 
+           RowBox[{
+            RowBox[{"Binomial", "[", 
+             RowBox[{
+              RowBox[{"Length", "[", "#", "]"}], ",", "u"}], "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"u", ",", "1", ",", 
+              RowBox[{"Min", "[", 
+               RowBox[{"hh", ",", 
+                RowBox[{"Length", "[", "#", "]"}]}], "]"}]}], "}"}]}], "]"}], 
+          "&"}], "\n", "    ", "/@", 
+         RowBox[{"minPartitions", "[", "d", "]"}]}], ")"}], "]"}]}]}], ";"}], 
+   "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"epsGamma", "[", 
+      RowBox[{"c_Association", ",", "p_List"}], "]"}], ":=", 
+     RowBox[{"Total", "[", 
+      RowBox[{"KeyValueMap", "[", "\n", "  ", 
+       RowBox[{
+        RowBox[{"Function", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"k", ",", "x"}], "}"}], ",", 
+          RowBox[{"x", " ", 
+           RowBox[{"p", "[", 
+            RowBox[{"[", 
+             RowBox[{"binIndex", "[", 
+              RowBox[{"decodeState", "[", "k", "]"}], "]"}], "]"}], "]"}]}]}],
+          "]"}], ",", "c"}], "]"}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"epsUpsilon", "[", 
+      RowBox[{"c_Association", ",", "p_List"}], "]"}], ":=", 
+     RowBox[{"Total", "[", 
+      RowBox[{"KeyValueMap", "[", "\n", "  ", 
+       RowBox[{
+        RowBox[{"Function", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"k", ",", "x"}], "}"}], ",", 
+          RowBox[{"With", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"ab", "=", 
+              RowBox[{"decodeJoint", "[", "k", "]"}]}], "}"}], ",", "\n", 
+            "    ", 
+            RowBox[{"x", " ", 
+             RowBox[{"Sqrt", "[", 
+              RowBox[{
+               RowBox[{"p", "[", 
+                RowBox[{"[", 
+                 RowBox[{"binIndex", "[", 
+                  RowBox[{"ab", "[", 
+                   RowBox[{"[", "1", "]"}], "]"}], "]"}], "]"}], "]"}], "*", 
+               RowBox[{"p", "[", 
+                RowBox[{"[", 
+                 RowBox[{"binIndex", "[", 
+                  RowBox[{"ab", "[", 
+                   RowBox[{"[", "2", "]"}], "]"}], "]"}], "]"}], "]"}]}], 
+              "]"}]}]}], "]"}]}], "]"}], ",", "c"}], "]"}], "]"}]}], ";"}], 
+   "\n"}]}]], "Input",
+ CellLabel->
+  "In[660]:=",ExpressionUUID->"ab035327-ab79-43f7-895f-8f01281cce36"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["5. S36 LEFT and RIGHT for j=4, depths d=1..4", "Section",ExpressionUUID->"1c0ebf21-4507-43b8-b435-7d1d342be1a7"],
+
+Cell["\<\
+For 4Y: f4(9)=14 and binomial(9,4)=126. LEFT=C_d^h [Sum_Omega |W4(m)|-28 \
+Sum_Omega sqrt(p_m p_n)]/[252+28(C_d^h-1)]. RIGHT=epsUpsilon(Upsilon_dD)+[14 \
+C_d^h/(126+14(C_d^h-1))] epsUpsilon(hatUpsilon_dD). Compare Delta=LEFT-RIGHT. \
+Positive Delta violates the corresponding d-producibility bound.\
+\>", "Text",ExpressionUUID->"170bd431-628b-46ff-85bb-bfab61746b00"],
+
+Cell[BoxData[
+ RowBox[{"\n", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"ClearAll", "[", 
+     RowBox[{"oneS36", ",", "allS36"}], "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"oneS36", "[", 
+      RowBox[{
+      "d_Integer", ",", "hh_Integer", ",", "corr_List", ",", "p_List"}], 
+      "]"}], ":=", "\n", " ", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+        "wv", ",", "f", ",", "C", ",", "den", ",", "left", ",", "right", ",", 
+         "e", ",", "eh", ",", "pairPop"}], "}"}], ",", "\n", " ", 
+       RowBox[{
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"!", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"1", "<=", "d", "<=", "4"}], " ", "&&", " ", 
+             RowBox[{"hh", ">=", "1"}], " ", "&&", " ", 
+             RowBox[{
+              RowBox[{"Length", "[", "corr", "]"}], ">=", "340"}], " ", "&&", 
+             "\n", "   ", 
+             RowBox[{
+              RowBox[{"Length", "[", "p", "]"}], "==", "512"}], " ", "&&", 
+             " ", 
+             RowBox[{"VectorQ", "[", 
+              RowBox[{"corr", ",", "NumericQ"}], "]"}], "&&", 
+             RowBox[{"VectorQ", "[", 
+              RowBox[{"p", ",", "NumericQ"}], "]"}]}], ")"}]}], ",", "\n", 
+          "   ", 
+          RowBox[{"Return", "[", 
+           RowBox[{"Failure", "[", 
+            RowBox[{"\"\<BadInput\>\"", ",", 
+             RowBox[{"<|", "|>"}]}], "]"}], "]"}]}], "]"}], ";", "\n", " ", 
+        RowBox[{"wv", "=", 
+         RowBox[{"allW", "[", 
+          RowBox[{"4", ",", "corr"}], "]"}]}], ";", 
+        RowBox[{"f", "=", 
+         RowBox[{"fPaper", "[", 
+          RowBox[{"4", ",", "9"}], "]"}]}], ";", 
+        RowBox[{"C", "=", 
+         RowBox[{"cDh", "[", 
+          RowBox[{"d", ",", "hh"}], "]"}]}], ";", "\n", " ", 
+        RowBox[{"pairPop", "=", 
+         RowBox[{"pairPopulation", "[", "p", "]"}]}], ";", 
+        RowBox[{"den", "=", 
+         RowBox[{
+          RowBox[{"Binomial", "[", 
+           RowBox[{"9", ",", "4"}], "]"}], "+", 
+          RowBox[{"f", 
+           RowBox[{"(", 
+            RowBox[{"C", "-", "1"}], ")"}]}]}]}], ";", "\n", " ", 
+        RowBox[{"left", "=", 
+         RowBox[{"N", "[", 
+          RowBox[{"C", " ", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"Total", "[", 
+               RowBox[{"Abs", "[", "wv", "]"}], "]"}], "-", 
+              RowBox[{"2", " ", "f", " ", "pairPop"}]}], ")"}], "/", 
+            RowBox[{"(", " ", "den", ")"}]}]}], "]"}]}], ";", "\n", " ", 
+        RowBox[{"e", "=", 
+         RowBox[{"N", "[", 
+          RowBox[{"epsUpsilon", "[", 
+           RowBox[{
+            RowBox[{"upsilonD", "[", 
+             RowBox[{"d", ",", "hh"}], "]"}], ",", "p"}], "]"}], "]"}]}], ";",
+         "\n", " ", 
+        RowBox[{"eh", "=", 
+         RowBox[{"N", "[", 
+          RowBox[{"epsUpsilon", "[", 
+           RowBox[{
+            RowBox[{"hatUpsilon", "[", 
+             RowBox[{"d", ",", "hh"}], "]"}], ",", "p"}], "]"}], "]"}]}], ";",
+         "\n", " ", 
+        RowBox[{"right", "=", 
+         RowBox[{"N", "[", 
+          RowBox[{"e", "+", 
+           RowBox[{"f", "*", 
+            RowBox[{"C", "/", "den"}], "*", "eh"}]}], "]"}]}], ";", "\n", " ", 
+        RowBox[{"<|", 
+         RowBox[{
+          RowBox[{"\"\<d\>\"", "->", "d"}], ",", 
+          RowBox[{"\"\<h\>\"", "->", "hh"}], ",", "\n", "   ", 
+          RowBox[{"\"\<W(1,8)\>\"", "->", 
+           RowBox[{"N", "[", 
+            RowBox[{"wv", "[", 
+             RowBox[{"[", "1", "]"}], "]"}], "]"}]}], ",", 
+          RowBox[{"\"\<W(2,7)\>\"", "->", 
+           RowBox[{"N", "[", 
+            RowBox[{"wv", "[", 
+             RowBox[{"[", "2", "]"}], "]"}], "]"}]}], ",", "\n", "   ", 
+          RowBox[{"\"\<W(3,6)\>\"", "->", 
+           RowBox[{"N", "[", 
+            RowBox[{"wv", "[", 
+             RowBox[{"[", "3", "]"}], "]"}], "]"}]}], ",", 
+          RowBox[{"\"\<W(4,5)\>\"", "->", 
+           RowBox[{"N", "[", 
+            RowBox[{"wv", "[", 
+             RowBox[{"[", "4", "]"}], "]"}], "]"}]}], ",", "\n", "   ", 
+          RowBox[{"\"\<SumAbsW\>\"", "->", 
+           RowBox[{"N", "[", 
+            RowBox[{"Total", "[", 
+             RowBox[{"Abs", "[", "wv", "]"}], "]"}], "]"}]}], ",", 
+          RowBox[{"\"\<Cdh\>\"", "->", "C"}], ",", "\n", "   ", 
+          RowBox[{"\"\<PairPopulationSum\>\"", "->", 
+           RowBox[{"N", "[", "pairPop", "]"}]}], ",", "\n", "   ", 
+          RowBox[{"\"\<EpsilonGamma\>\"", "->", "e"}], ",", 
+          RowBox[{"\"\<EpsilonHat\>\"", "->", "eh"}], ",", "\n", "   ", 
+          RowBox[{"\"\<LEFT\>\"", "->", "left"}], ",", 
+          RowBox[{"\"\<RIGHT\>\"", "->", "right"}], ",", 
+          RowBox[{"\"\<Delta\>\"", "->", 
+           RowBox[{"N", "[", 
+            RowBox[{"left", "-", "right"}], "]"}]}], ",", "\n", "   ", 
+          RowBox[{"\"\<ViolationQ\>\"", "->", 
+           RowBox[{"TrueQ", "[", 
+            RowBox[{"left", ">", "right"}], "]"}]}]}], "|>"}]}]}], "\n", " ", 
+      "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"allS36", "[", 
+      RowBox[{"hh_Integer", ",", "corr_List", ",", "p_List"}], "]"}], ":=", 
+     "\n", " ", 
+     RowBox[{"Dataset", "[", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"oneS36", "[", 
+         RowBox[{"d", ",", "hh", ",", "corr", ",", "p"}], "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"d", ",", "1", ",", "4"}], "}"}]}], "]"}], "]"}]}], ";"}], 
+   "\n"}]}]], "Input",
+ CellChangeTimes->{
+  4.0011588776047373`*^9},ExpressionUUID->"11f475f5-2264-4678-9182-\
+bbafe3b6723f"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["6. Run the 10-repetition experiment", "Section",ExpressionUUID->"0b79faa8-a5e4-460b-b51a-1ab777dc98d4"],
+
+Cell[BoxData[
+ RowBox[{"\n", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"ClearAll", "[", "allRepetitions", "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"allRepetitions", "[", 
+      RowBox[{"folderList_List", ",", 
+       RowBox[{"hh_Integer:", "1"}]}], "]"}], ":=", "\n", " ", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"results", "=", 
+          RowBox[{"{", "}"}]}], ",", "raw", ",", "corr", ",", "p", ",", 
+         "ans"}], "}"}], ",", "\n", " ", 
+       RowBox[{
+        RowBox[{"Do", "[", "\n", "  ", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"raw", "=", 
+            RowBox[{"loadRep", "[", 
+             RowBox[{"folderList", "[", 
+              RowBox[{"[", "rep", "]"}], "]"}], "]"}]}], ";", "\n", "  ", 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"Head", "[", "raw", "]"}], "===", "Failure"}], ",", 
+             "\n", "   ", 
+             RowBox[{
+              RowBox[{"AppendTo", "[", 
+               RowBox[{"results", ",", 
+                RowBox[{"<|", 
+                 RowBox[{
+                  RowBox[{"\"\<Repeat\>\"", "->", "rep"}], ",", 
+                  RowBox[{"\"\<Error\>\"", "->", "raw"}]}], "|>"}]}], "]"}], 
+              ";", "\n", "   ", 
+              RowBox[{"Continue", "[", "]"}]}]}], "]"}], ";", "\n", "  ", 
+           RowBox[{"corr", "=", 
+            RowBox[{"correlators", "[", "raw", "]"}]}], ";", 
+           RowBox[{"p", "=", 
+            RowBox[{"computationalProbabilities", "[", "raw", "]"}]}], ";", 
+           "\n", "  ", 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{"Head", "[", "corr", "]"}], "===", "Failure"}], "||", 
+              RowBox[{
+               RowBox[{"Head", "[", "p", "]"}], "===", "Failure"}]}], ",", 
+             "\n", "   ", 
+             RowBox[{
+              RowBox[{"AppendTo", "[", 
+               RowBox[{"results", ",", 
+                RowBox[{"<|", 
+                 RowBox[{
+                  RowBox[{"\"\<Repeat\>\"", "->", "rep"}], ",", "\n", "     ", 
+                  RowBox[{
+                  "\"\<Error\>\"", "->", 
+                   "\"\<Invalid measurement file format\>\""}]}], "|>"}]}], 
+               "]"}], ";", "\n", "   ", 
+              RowBox[{"Continue", "[", "]"}]}]}], "]"}], ";", "\n", "  ", 
+           RowBox[{"Do", "[", "\n", "   ", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"ans", "=", 
+               RowBox[{"oneS36", "[", 
+                RowBox[{"d", ",", "hh", ",", "corr", ",", "p"}], "]"}]}], ";",
+               "\n", "   ", 
+              RowBox[{"AppendTo", "[", 
+               RowBox[{"results", ",", 
+                RowBox[{"Join", "[", 
+                 RowBox[{
+                  RowBox[{"<|", 
+                   RowBox[{"\"\<Repeat\>\"", "->", "rep"}], "|>"}], ",", 
+                  "ans"}], "]"}]}], "]"}]}], ",", "\n", "   ", 
+             RowBox[{"{", 
+              RowBox[{"d", ",", "1", ",", "4"}], "}"}]}], "]"}]}], ",", "\n", 
+          "  ", 
+          RowBox[{"{", 
+           RowBox[{"rep", ",", "1", ",", 
+            RowBox[{"Length", "[", "folderList", "]"}]}], "}"}]}], "]"}], ";",
+         "\n", " ", 
+        RowBox[{"Dataset", "[", "results", "]"}]}]}], "]"}]}], ";"}], "\n", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Actual", " ", 
+       RowBox[{"experiment", ":", "\n", "results4Y"}]}], "=", 
+      RowBox[{"allRepetitions", "[", 
+       RowBox[{"folders", ",", "1"}], "]"}]}], ";", "\n", "results4Y"}], "\n",
+     "*)"}], "\n"}]}]], "Input",
+ CellLabel->
+  "In[683]:=",ExpressionUUID->"5daf48a0-d894-4ec3-8cae-451e4583c00c"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["7. Worked example with ideal pure CL9 (no external files)", "Section",ExpressionUUID->"f6ad90da-6b00-46bf-b28f-874c9f256630"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\n", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"idealKet", "=", 
+     RowBox[{"ConstantArray", "[", 
+      RowBox[{"0", ",", "512"}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"Do", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"idealKet", "[", 
+        RowBox[{"[", 
+         RowBox[{"binIndex", "[", 
+          RowBox[{"toBits", "[", "s", "]"}], "]"}], "]"}], "]"}], "=", 
+       RowBox[{"1", "/", 
+        RowBox[{"(", 
+         RowBox[{"2", " ", 
+          RowBox[{"Sqrt", "[", "2", "]"}]}], ")"}]}]}], ",", 
+      RowBox[{"{", 
+       RowBox[{"s", ",", "stateStrings"}], "}"}]}], "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"idealP", "=", 
+     RowBox[{
+      RowBox[{"Abs", "[", "idealKet", "]"}], "^", "2"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"idealPauli", "[", "code_List", "]"}], ":=", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"flipSites", "=", 
+          RowBox[{"Flatten", "[", 
+           RowBox[{"Position", "[", 
+            RowBox[{"code", ",", 
+             RowBox[{"1", "|", "2"}]}], "]"}], "]"}]}], ",", "\n", " ", 
+         RowBox[{"yzSites", "=", 
+          RowBox[{"Flatten", "[", 
+           RowBox[{"Position", "[", 
+            RowBox[{"code", ",", 
+             RowBox[{"2", "|", "3"}]}], "]"}], "]"}]}], ",", 
+         RowBox[{"yy", "=", 
+          RowBox[{"Count", "[", 
+           RowBox[{"code", ",", "2"}], "]"}]}]}], "}"}], ",", "\n", " ", 
+       RowBox[{"FullSimplify", "[", 
+        RowBox[{"Sum", "[", 
+         RowBox[{
+          RowBox[{"Module", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"b", "=", 
+               RowBox[{"IntegerDigits", "[", 
+                RowBox[{"x", ",", "2", ",", "9"}], "]"}]}], ",", "nb", ",", 
+              "phase"}], "}"}], ",", "\n", "  ", 
+            RowBox[{
+             RowBox[{"nb", "=", "b"}], ";", 
+             RowBox[{
+              RowBox[{"nb", "[", 
+               RowBox[{"[", "flipSites", "]"}], "]"}], "=", 
+              RowBox[{"1", "-", 
+               RowBox[{"nb", "[", 
+                RowBox[{"[", "flipSites", "]"}], "]"}]}]}], ";", "\n", "  ", 
+             RowBox[{"phase", "=", 
+              RowBox[{
+               RowBox[{"I", "^", "yy"}], " ", 
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{"-", "1"}], ")"}], "^", 
+                RowBox[{"Total", "[", 
+                 RowBox[{"b", "[", 
+                  RowBox[{"[", "yzSites", "]"}], "]"}], "]"}]}]}]}], ";", 
+             "\n", "  ", 
+             RowBox[{
+              RowBox[{"Conjugate", "[", 
+               RowBox[{"idealKet", "[", 
+                RowBox[{"[", 
+                 RowBox[{"binIndex", "[", "nb", "]"}], "]"}], "]"}], "]"}], 
+              "*", "phase", "*", "\n", "      ", 
+              RowBox[{"idealKet", "[", 
+               RowBox[{"[", 
+                RowBox[{"binIndex", "[", "b", "]"}], "]"}], "]"}]}]}]}], 
+           "]"}], ",", "\n", " ", 
+          RowBox[{"{", 
+           RowBox[{"x", ",", "0", ",", "511"}], "}"}]}], "]"}], "]"}]}], 
+      "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"idealCorr", "=", 
+     RowBox[{"ConstantArray", "[", 
+      RowBox[{"0", ",", "341"}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"Do", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"idealCorr", "[", 
+        RowBox[{"[", 
+         RowBox[{
+          RowBox[{"rowsByY", "[", "4", "]"}], "[", 
+          RowBox[{"[", "k", "]"}], "]"}], "]"}], "]"}], "=", 
+       RowBox[{"idealPauli", "[", 
+        RowBox[{
+         RowBox[{"pauliCodes", "[", "4", "]"}], "[", 
+         RowBox[{"[", "k", "]"}], "]"}], "]"}]}], ",", "\n", " ", 
+      RowBox[{"{", 
+       RowBox[{"k", ",", "126"}], "}"}]}], "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{"\"\<CL9 norm squared = \>\"", ",", 
+      RowBox[{
+       RowBox[{"Conjugate", "[", "idealKet", "]"}], ".", "idealKet"}]}], 
+     "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{"\"\<four signed W values = \>\"", ",", 
+      RowBox[{"allW", "[", 
+       RowBox[{"4", ",", "idealCorr"}], "]"}]}], "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{"\"\<four pair-population root terms = \>\"", ",", 
+      RowBox[{"pairPopulation", "[", "idealP", "]"}]}], "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"Print", "[", "\"\<IDEAL 4Y S36 LEFT / RIGHT (h=1):\>\"", "]"}], 
+    ";"}], "\n", 
+   RowBox[{"allS36", "[", 
+    RowBox[{"1", ",", "idealCorr", ",", "idealP"}], "]"}], "\n"}]}]], "Input",
+ CellLabel->
+  "In[685]:=",ExpressionUUID->"426712aa-7df8-4e4e-9e24-023d0d960ff5"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"CL9 norm squared = \"\>", "\[InvisibleSpace]", "1"}],
+  SequenceForm["CL9 norm squared = ", 1],
+  Editable->False]], "Print",
+ CellChangeTimes->{4.0011588619973483`*^9},
+ CellLabel->
+  "\:6b63\:5728\:8ba1\:7b97In[685]:=",ExpressionUUID->"e9681689-7ab2-4889-\
+ae89-e9c2c657e18b"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"four signed W values = \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"33", ",", "33", ",", "33", ",", "33"}], "}"}]}],
+  SequenceForm["four signed W values = ", {33, 33, 33, 33}],
+  Editable->False]], "Print",
+ CellChangeTimes->{4.0011588620003405`*^9},
+ CellLabel->
+  "\:6b63\:5728\:8ba1\:7b97In[685]:=",ExpressionUUID->"4e393f1a-c435-472c-\
+bd78-7700de713fdf"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"four pair-population root terms = \"\>", "\[InvisibleSpace]", 
+   FractionBox["1", "2"]}],
+  SequenceForm["four pair-population root terms = ", 
+   Rational[1, 2]],
+  Editable->False]], "Print",
+ CellChangeTimes->{4.001158862006326*^9},
+ CellLabel->
+  "\:6b63\:5728\:8ba1\:7b97In[685]:=",ExpressionUUID->"c5b7f971-8a5b-4f2a-\
+a147-7fd42cd67326"],
+
+Cell[BoxData["\<\"IDEAL 4Y S36 LEFT / RIGHT (h=1):\"\>"], "Print",
+ CellChangeTimes->{4.0011588620113115`*^9},
+ CellLabel->
+  "\:6b63\:5728\:8ba1\:7b97In[685]:=",ExpressionUUID->"659764dc-2556-40ce-\
+9da8-09a5ed08fdcd"]
+}, Open  ]],
+
+Cell[BoxData[
+ TagBox[
+  TemplateBox[{TagBox[
+     DynamicModuleBox[{
+      TypeSystem`NestedGrid`PackagePrivate`$state$$ = 
+       Data`UnorderedAssociation[
+        "RowCount" -> 4, "Length" -> 4, "InitialType" -> TypeSystem`Vector[
+           
+           TypeSystem`Struct[{
+            "d", "h", "W(1,8)", "W(2,7)", "W(3,6)", "W(4,5)", "SumAbsW", 
+             "Cdh", "PairPopulationSum", "EpsilonGamma", "EpsilonHat", "LEFT",
+              "RIGHT", "Delta", "ViolationQ"}, {
+             TypeSystem`Atom[Integer], 
+             TypeSystem`Atom[Integer], 
+             TypeSystem`Atom[Real], 
+             TypeSystem`Atom[Real], 
+             TypeSystem`Atom[Real], 
+             TypeSystem`Atom[Real], 
+             TypeSystem`Atom[Real], 
+             TypeSystem`Atom[Integer], 
+             TypeSystem`Atom[Real], 
+             TypeSystem`Atom[Real], 
+             TypeSystem`Atom[Real], 
+             TypeSystem`Atom[Real], 
+             TypeSystem`Atom[Real], 
+             TypeSystem`Atom[Real], 
+             TypeSystem`Atom[TypeSystem`Boolean]}], 4], "Shape" -> 
+         TypeSystem`PackageScope`HeaderShape[
+           
+           Association[{All, "d"} -> 1, {All, "h"} -> 1, {All, "W(1,8)"} -> 
+            1, {All, "W(2,7)"} -> 1, {All, "W(3,6)"} -> 1, {All, "W(4,5)"} -> 
+            1, {All, "SumAbsW"} -> 1, {All, "Cdh"} -> 
+            1, {All, "PairPopulationSum"} -> 1, {All, "EpsilonGamma"} -> 
+            1, {All, "EpsilonHat"} -> 1, {All, "LEFT"} -> 1, {All, "RIGHT"} -> 
+            1, {All, "Delta"} -> 1, {All, "ViolationQ"} -> 1], 
+           TypeSystem`PackageScope`Limited[
+            TypeSystem`PackageScope`ColumnShape[
+             TypeSystem`PackageScope`RowShape[
+              Association[
+              "d" -> TypeSystem`PackageScope`AtomShape[34], "h" -> 
+               TypeSystem`PackageScope`AtomShape[34], "W(1,8)" -> 
+               TypeSystem`PackageScope`AtomShape[60], "W(2,7)" -> 
+               TypeSystem`PackageScope`AtomShape[60], "W(3,6)" -> 
+               TypeSystem`PackageScope`AtomShape[60], "W(4,5)" -> 
+               TypeSystem`PackageScope`AtomShape[60], "SumAbsW" -> 
+               TypeSystem`PackageScope`AtomShape[60], "Cdh" -> 
+               TypeSystem`PackageScope`AtomShape[34], "PairPopulationSum" -> 
+               TypeSystem`PackageScope`AtomShape[60], "EpsilonGamma" -> 
+               TypeSystem`PackageScope`AtomShape[60], "EpsilonHat" -> 
+               TypeSystem`PackageScope`AtomShape[60], "LEFT" -> 
+               TypeSystem`PackageScope`AtomShape[60], "RIGHT" -> 
+               TypeSystem`PackageScope`AtomShape[60], "Delta" -> 
+               TypeSystem`PackageScope`AtomShape[60], "ViolationQ" -> 
+               TypeSystem`PackageScope`AtomShape[36]]]], 4, {}]], 
+         "InitialData" -> TypeSystem`PackageScope`CacheHandle[911232590], 
+         "Type" -> TypeSystem`Vector[
+           
+           TypeSystem`Struct[{
+            "d", "h", "W(1,8)", "W(2,7)", "W(3,6)", "W(4,5)", "SumAbsW", 
+             "Cdh", "PairPopulationSum", "EpsilonGamma", "EpsilonHat", "LEFT",
+              "RIGHT", "Delta", "ViolationQ"}, {
+             TypeSystem`Atom[Integer], 
+             TypeSystem`Atom[Integer], 
+             TypeSystem`Atom[Real], 
+             TypeSystem`Atom[Real], 
+             TypeSystem`Atom[Real], 
+             TypeSystem`Atom[Real], 
+             TypeSystem`Atom[Real], 
+             TypeSystem`Atom[Integer], 
+             TypeSystem`Atom[Real], 
+             TypeSystem`Atom[Real], 
+             TypeSystem`Atom[Real], 
+             TypeSystem`Atom[Real], 
+             TypeSystem`Atom[Real], 
+             TypeSystem`Atom[Real], 
+             TypeSystem`Atom[TypeSystem`Boolean]}], 4], "HandleQ" -> True, 
+         "RowTarget" -> 20, "Data" -> 
+         TypeSystem`PackageScope`CacheHandle[911232590]], 
+       TypeSystem`NestedGrid`PackagePrivate`$path$$ = {}, 
+       TypeSystem`NestedGrid`PackagePrivate`$pos$$ = 1, 
+       TypeSystem`NestedGrid`PackagePrivate`$grid$$ = 
+       DynamicModule[{
+         TypeSystem`NestedGrid`PackagePrivate`renderedGrid = Deploy[
+            Style[
+             Grid[{{
+                Item[
+                 Annotation[
+                  EventHandler[
+                   MouseAppearance[
+                    Mouseover[
+                    Pane[
+                    RawBoxes[
+                    StyleBox["\"d\"", FontColor -> GrayLevel[0.4]]], {{
+                    20, Full}, 15}], 
+                    Style[
+                    Pane[
+                    RawBoxes[
+                    StyleBox[
+                    "\"d\"", FontColor -> 
+                    RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], {{20, Full}, 15}], FontColor -> 
+                    RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
+                   TypeSystem`NestedGrid`PackagePrivate`updateState[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 66256626][{
+                    All, "d"}]], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[All, "d"]], "Mouse"], Background -> 
+                 GrayLevel[0.95], Alignment -> {Left, Baseline}], 
+                Item[
+                 Annotation[
+                  EventHandler[
+                   MouseAppearance[
+                    Mouseover[
+                    Pane[
+                    RawBoxes[
+                    StyleBox["\"h\"", FontColor -> GrayLevel[0.4]]], {{
+                    20, Full}, 15}], 
+                    Style[
+                    Pane[
+                    RawBoxes[
+                    StyleBox[
+                    "\"h\"", FontColor -> 
+                    RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], {{20, Full}, 15}], FontColor -> 
+                    RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
+                   TypeSystem`NestedGrid`PackagePrivate`updateState[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 66256626][{
+                    All, "h"}]], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[All, "h"]], "Mouse"], Background -> 
+                 GrayLevel[0.95], Alignment -> {Left, Baseline}], 
+                Item[
+                 Annotation[
+                  EventHandler[
+                   MouseAppearance[
+                    Mouseover[
+                    Pane[
+                    RawBoxes[
+                    StyleBox["\"W(1,8)\"", FontColor -> GrayLevel[0.4]]], {{
+                    20, Full}, 15}], 
+                    Style[
+                    Pane[
+                    RawBoxes[
+                    StyleBox[
+                    "\"W(1,8)\"", FontColor -> 
+                    RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], {{20, Full}, 15}], FontColor -> 
+                    RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
+                   TypeSystem`NestedGrid`PackagePrivate`updateState[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 66256626][{
+                    All, "W(1,8)"}]], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[All, "W(1,8)"]], "Mouse"], 
+                 Background -> GrayLevel[0.95], 
+                 Alignment -> {Left, Baseline}], 
+                Item[
+                 Annotation[
+                  EventHandler[
+                   MouseAppearance[
+                    Mouseover[
+                    Pane[
+                    RawBoxes[
+                    StyleBox["\"W(2,7)\"", FontColor -> GrayLevel[0.4]]], {{
+                    20, Full}, 15}], 
+                    Style[
+                    Pane[
+                    RawBoxes[
+                    StyleBox[
+                    "\"W(2,7)\"", FontColor -> 
+                    RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], {{20, Full}, 15}], FontColor -> 
+                    RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
+                   TypeSystem`NestedGrid`PackagePrivate`updateState[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 66256626][{
+                    All, "W(2,7)"}]], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[All, "W(2,7)"]], "Mouse"], 
+                 Background -> GrayLevel[0.95], 
+                 Alignment -> {Left, Baseline}], 
+                Item[
+                 Annotation[
+                  EventHandler[
+                   MouseAppearance[
+                    Mouseover[
+                    Pane[
+                    RawBoxes[
+                    StyleBox["\"W(3,6)\"", FontColor -> GrayLevel[0.4]]], {{
+                    20, Full}, 15}], 
+                    Style[
+                    Pane[
+                    RawBoxes[
+                    StyleBox[
+                    "\"W(3,6)\"", FontColor -> 
+                    RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], {{20, Full}, 15}], FontColor -> 
+                    RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
+                   TypeSystem`NestedGrid`PackagePrivate`updateState[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 66256626][{
+                    All, "W(3,6)"}]], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[All, "W(3,6)"]], "Mouse"], 
+                 Background -> GrayLevel[0.95], 
+                 Alignment -> {Left, Baseline}], 
+                Item[
+                 Annotation[
+                  EventHandler[
+                   MouseAppearance[
+                    Mouseover[
+                    Pane[
+                    RawBoxes[
+                    StyleBox["\"W(4,5)\"", FontColor -> GrayLevel[0.4]]], {{
+                    20, Full}, 15}], 
+                    Style[
+                    Pane[
+                    RawBoxes[
+                    StyleBox[
+                    "\"W(4,5)\"", FontColor -> 
+                    RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], {{20, Full}, 15}], FontColor -> 
+                    RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
+                   TypeSystem`NestedGrid`PackagePrivate`updateState[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 66256626][{
+                    All, "W(4,5)"}]], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[All, "W(4,5)"]], "Mouse"], 
+                 Background -> GrayLevel[0.95], 
+                 Alignment -> {Left, Baseline}], 
+                Item[
+                 Annotation[
+                  EventHandler[
+                   MouseAppearance[
+                    Mouseover[
+                    Pane[
+                    RawBoxes[
+                    StyleBox["\"SumAbsW\"", FontColor -> GrayLevel[0.4]]], {{
+                    20, Full}, 15}], 
+                    Style[
+                    Pane[
+                    RawBoxes[
+                    StyleBox[
+                    "\"SumAbsW\"", FontColor -> 
+                    RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], {{20, Full}, 15}], FontColor -> 
+                    RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
+                   TypeSystem`NestedGrid`PackagePrivate`updateState[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 66256626][{
+                    All, "SumAbsW"}]], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[All, "SumAbsW"]], "Mouse"], 
+                 Background -> GrayLevel[0.95], 
+                 Alignment -> {Left, Baseline}], 
+                Item[
+                 Annotation[
+                  EventHandler[
+                   MouseAppearance[
+                    Mouseover[
+                    Pane[
+                    RawBoxes[
+                    StyleBox["\"Cdh\"", FontColor -> GrayLevel[0.4]]], {{
+                    20, Full}, 15}], 
+                    Style[
+                    Pane[
+                    RawBoxes[
+                    StyleBox[
+                    "\"Cdh\"", FontColor -> 
+                    RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], {{20, Full}, 15}], FontColor -> 
+                    RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
+                   TypeSystem`NestedGrid`PackagePrivate`updateState[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 66256626][{
+                    All, "Cdh"}]], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[All, "Cdh"]], "Mouse"], Background -> 
+                 GrayLevel[0.95], Alignment -> {Left, Baseline}], 
+                Item[
+                 Annotation[
+                  EventHandler[
+                   MouseAppearance[
+                    Mouseover[
+                    Pane[
+                    RawBoxes[
+                    StyleBox[
+                    "\"PairPopulationSum\"", FontColor -> GrayLevel[0.4]]], {{
+                    20, Full}, 15}], 
+                    Style[
+                    Pane[
+                    RawBoxes[
+                    StyleBox[
+                    "\"PairPopulationSum\"", FontColor -> 
+                    RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], {{20, Full}, 15}], FontColor -> 
+                    RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
+                   TypeSystem`NestedGrid`PackagePrivate`updateState[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 66256626][{
+                    All, "PairPopulationSum"}]], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[All, "PairPopulationSum"]], 
+                  "Mouse"], Background -> GrayLevel[0.95], 
+                 Alignment -> {Left, Baseline}], 
+                Item[
+                 Annotation[
+                  EventHandler[
+                   MouseAppearance[
+                    Mouseover[
+                    Pane[
+                    RawBoxes[
+                    StyleBox[
+                    "\"EpsilonGamma\"", FontColor -> GrayLevel[0.4]]], {{
+                    20, Full}, 15}], 
+                    Style[
+                    Pane[
+                    RawBoxes[
+                    StyleBox[
+                    "\"EpsilonGamma\"", FontColor -> 
+                    RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], {{20, Full}, 15}], FontColor -> 
+                    RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
+                   TypeSystem`NestedGrid`PackagePrivate`updateState[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 66256626][{
+                    All, "EpsilonGamma"}]], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[All, "EpsilonGamma"]], "Mouse"], 
+                 Background -> GrayLevel[0.95], 
+                 Alignment -> {Left, Baseline}], 
+                Item[
+                 Annotation[
+                  EventHandler[
+                   MouseAppearance[
+                    Mouseover[
+                    Pane[
+                    RawBoxes[
+                    StyleBox[
+                    "\"EpsilonHat\"", FontColor -> GrayLevel[0.4]]], {{
+                    20, Full}, 15}], 
+                    Style[
+                    Pane[
+                    RawBoxes[
+                    StyleBox[
+                    "\"EpsilonHat\"", FontColor -> 
+                    RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], {{20, Full}, 15}], FontColor -> 
+                    RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
+                   TypeSystem`NestedGrid`PackagePrivate`updateState[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 66256626][{
+                    All, "EpsilonHat"}]], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[All, "EpsilonHat"]], "Mouse"], 
+                 Background -> GrayLevel[0.95], 
+                 Alignment -> {Left, Baseline}], 
+                Item[
+                 Annotation[
+                  EventHandler[
+                   MouseAppearance[
+                    Mouseover[
+                    Pane[
+                    RawBoxes[
+                    StyleBox["\"LEFT\"", FontColor -> GrayLevel[0.4]]], {{
+                    20, Full}, 15}], 
+                    Style[
+                    Pane[
+                    RawBoxes[
+                    StyleBox[
+                    "\"LEFT\"", FontColor -> 
+                    RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], {{20, Full}, 15}], FontColor -> 
+                    RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
+                   TypeSystem`NestedGrid`PackagePrivate`updateState[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 66256626][{
+                    All, "LEFT"}]], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[All, "LEFT"]], "Mouse"], Background -> 
+                 GrayLevel[0.95], Alignment -> {Left, Baseline}], 
+                Item[
+                 Annotation[
+                  EventHandler[
+                   MouseAppearance[
+                    Mouseover[
+                    Pane[
+                    RawBoxes[
+                    StyleBox["\"RIGHT\"", FontColor -> GrayLevel[0.4]]], {{
+                    20, Full}, 15}], 
+                    Style[
+                    Pane[
+                    RawBoxes[
+                    StyleBox[
+                    "\"RIGHT\"", FontColor -> 
+                    RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], {{20, Full}, 15}], FontColor -> 
+                    RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
+                   TypeSystem`NestedGrid`PackagePrivate`updateState[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 66256626][{
+                    All, "RIGHT"}]], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[All, "RIGHT"]], "Mouse"], 
+                 Background -> GrayLevel[0.95], 
+                 Alignment -> {Left, Baseline}], 
+                Item[
+                 Annotation[
+                  EventHandler[
+                   MouseAppearance[
+                    Mouseover[
+                    Pane[
+                    RawBoxes[
+                    StyleBox["\"Delta\"", FontColor -> GrayLevel[0.4]]], {{
+                    20, Full}, 15}], 
+                    Style[
+                    Pane[
+                    RawBoxes[
+                    StyleBox[
+                    "\"Delta\"", FontColor -> 
+                    RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], {{20, Full}, 15}], FontColor -> 
+                    RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
+                   TypeSystem`NestedGrid`PackagePrivate`updateState[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 66256626][{
+                    All, "Delta"}]], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[All, "Delta"]], "Mouse"], 
+                 Background -> GrayLevel[0.95], 
+                 Alignment -> {Left, Baseline}], 
+                Item[
+                 Annotation[
+                  EventHandler[
+                   MouseAppearance[
+                    Mouseover[
+                    Pane[
+                    RawBoxes[
+                    StyleBox[
+                    "\"ViolationQ\"", FontColor -> GrayLevel[0.4]]], {{
+                    20, Full}, 15}], 
+                    Style[
+                    Pane[
+                    RawBoxes[
+                    StyleBox[
+                    "\"ViolationQ\"", FontColor -> 
+                    RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], {{20, Full}, 15}], FontColor -> 
+                    RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
+                   TypeSystem`NestedGrid`PackagePrivate`updateState[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 66256626][{
+                    All, "ViolationQ"}]], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[All, "ViolationQ"]], "Mouse"], 
+                 Background -> GrayLevel[0.95], 
+                 Alignment -> {Left, Baseline}]}, {
+                Pane[
+                 Annotation[
+                  RawBoxes["1"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[1, 
+                    Key["d"]]], "Mouse"], 
+                 ImageSize -> {{34, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["1"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[1, 
+                    Key["h"]]], "Mouse"], 
+                 ImageSize -> {{34, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["33.0"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[1, 
+                    Key["W(1,8)"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["33.0"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[1, 
+                    Key["W(2,7)"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["33.0"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[1, 
+                    Key["W(3,6)"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["33.0"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[1, 
+                    Key["W(4,5)"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["132.0"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[1, 
+                    Key["SumAbsW"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["9"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[1, 
+                    Key["Cdh"]]], "Mouse"], 
+                 ImageSize -> {{34, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["0.5"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[1, 
+                    Key["PairPopulationSum"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["0.0"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[1, 
+                    Key["EpsilonGamma"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["1.5"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[1, 
+                    Key["EpsilonHat"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["2.23109"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[1, 
+                    Key["LEFT"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["0.794118"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[1, 
+                    Key["RIGHT"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["1.43697"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[1, 
+                    Key["Delta"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["True"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[1, 
+                    Key["ViolationQ"]]], "Mouse"], 
+                 ImageSize -> {{36, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}]}, {
+                Pane[
+                 Annotation[
+                  RawBoxes["2"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[2, 
+                    Key["d"]]], "Mouse"], 
+                 ImageSize -> {{34, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["1"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[2, 
+                    Key["h"]]], "Mouse"], 
+                 ImageSize -> {{34, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["33.0"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[2, 
+                    Key["W(1,8)"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["33.0"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[2, 
+                    Key["W(2,7)"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["33.0"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[2, 
+                    Key["W(3,6)"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["33.0"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[2, 
+                    Key["W(4,5)"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["132.0"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[2, 
+                    Key["SumAbsW"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["5"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[2, 
+                    Key["Cdh"]]], "Mouse"], 
+                 ImageSize -> {{34, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["0.5"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[2, 
+                    Key["PairPopulationSum"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["0.0"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[2, 
+                    Key["EpsilonGamma"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["1.5"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[2, 
+                    Key["EpsilonHat"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["1.62088"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[2, 
+                    Key["LEFT"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["0.576923"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[2, 
+                    Key["RIGHT"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["1.04396"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[2, 
+                    Key["Delta"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["True"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[2, 
+                    Key["ViolationQ"]]], "Mouse"], 
+                 ImageSize -> {{36, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}]}, {
+                Pane[
+                 Annotation[
+                  RawBoxes["3"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[3, 
+                    Key["d"]]], "Mouse"], 
+                 ImageSize -> {{34, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["1"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[3, 
+                    Key["h"]]], "Mouse"], 
+                 ImageSize -> {{34, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["33.0"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[3, 
+                    Key["W(1,8)"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["33.0"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[3, 
+                    Key["W(2,7)"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["33.0"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[3, 
+                    Key["W(3,6)"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["33.0"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[3, 
+                    Key["W(4,5)"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["132.0"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[3, 
+                    Key["SumAbsW"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["3"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[3, 
+                    Key["Cdh"]]], "Mouse"], 
+                 ImageSize -> {{34, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["0.5"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[3, 
+                    Key["PairPopulationSum"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["0.5"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[3, 
+                    Key["EpsilonGamma"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["0.0"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[3, 
+                    Key["EpsilonHat"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["1.14935"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[3, 
+                    Key["LEFT"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["0.5"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[3, 
+                    Key["RIGHT"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["0.649351"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[3, 
+                    Key["Delta"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["True"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[3, 
+                    Key["ViolationQ"]]], "Mouse"], 
+                 ImageSize -> {{36, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}]}, {
+                Pane[
+                 Annotation[
+                  RawBoxes["4"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[4, 
+                    Key["d"]]], "Mouse"], 
+                 ImageSize -> {{34, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["1"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[4, 
+                    Key["h"]]], "Mouse"], 
+                 ImageSize -> {{34, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["33.0"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[4, 
+                    Key["W(1,8)"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["33.0"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[4, 
+                    Key["W(2,7)"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["33.0"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[4, 
+                    Key["W(3,6)"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["33.0"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[4, 
+                    Key["W(4,5)"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["132.0"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[4, 
+                    Key["SumAbsW"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["3"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[4, 
+                    Key["Cdh"]]], "Mouse"], 
+                 ImageSize -> {{34, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["0.5"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[4, 
+                    Key["PairPopulationSum"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["0.5"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[4, 
+                    Key["EpsilonGamma"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["0.0"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[4, 
+                    Key["EpsilonHat"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["1.14935"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[4, 
+                    Key["LEFT"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["0.5"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[4, 
+                    Key["RIGHT"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["0.649351"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[4, 
+                    Key["Delta"]]], "Mouse"], 
+                 ImageSize -> {{60, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}], 
+                Pane[
+                 Annotation[
+                  RawBoxes["True"], 
+                  TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+                   GeneralUtilities`Slice[4, 
+                    Key["ViolationQ"]]], "Mouse"], 
+                 ImageSize -> {{36, Full}, Automatic}, 
+                 Alignment -> {Left, Baseline}]}}, BaseStyle -> {ContextMenu -> {
+                  MenuItem["Copy position to clipboard", 
+                   KernelExecute[
+                    TypeSystem`NestedGrid`PackagePrivate`toCurrentPosition[
+                    TypeSystem`NestedGrid`PackagePrivate`copyClip]], 
+                   MenuEvaluator -> Automatic], 
+                  MenuItem["Copy data to clipboard", 
+                   KernelExecute[
+                    TypeSystem`NestedGrid`PackagePrivate`toCurrentData[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`copyClip]], 
+                   MenuEvaluator -> Automatic], Delimiter, 
+                  MenuItem["Paste position in new cell", 
+                   KernelExecute[
+                    TypeSystem`NestedGrid`PackagePrivate`toCurrentPosition[
+                    TypeSystem`NestedGrid`PackagePrivate`cellPaste]], 
+                   MenuEvaluator -> Automatic], 
+                  MenuItem["Paste data in new cell", 
+                   KernelExecute[
+                    TypeSystem`NestedGrid`PackagePrivate`toCurrentData[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`cellPaste]], 
+                   MenuEvaluator -> Automatic]}, FontFamily -> "Verdana", 
+                FontSize -> 12}, Alignment -> Left, RowMinHeight -> 1.5, 
+              Dividers -> All, FrameStyle -> GrayLevel[0.85], 
+              BaseStyle -> {FontFamily -> "Verdana", FontSize -> 12}], 
+             LineBreakWithin -> False, ContextMenu -> {}, NumberMarks -> 
+             False, ShowAutoStyles -> False]], 
+          TypeSystem`NestedGrid`PackagePrivate`initialQ = True, 
+          TypeSystem`NestedGrid`PackagePrivate`self = $Failed}, 
+         Dynamic[
+          TypeSystem`NestedGrid`PackagePrivate`setupViewPath[
+          TypeSystem`NestedGrid`PackagePrivate`$path$$, If[
+             Not[TypeSystem`NestedGrid`PackagePrivate`initialQ], 
+             
+             Module[{TypeSystem`NestedGrid`PackagePrivate`tmpGrid$ = $Failed, 
+               TypeSystem`NestedGrid`PackagePrivate`tmpData$ = 
+               TypeSystem`NestedGrid`PackagePrivate`LookupCacheValue[
+                 TypeSystem`NestedGrid`PackagePrivate`$state$$["Data"]]}, 
+              TypeSystem`NestedGrid`PackagePrivate`tmpGrid$ = 
+               If[TypeSystem`NestedGrid`PackagePrivate`tmpData$ === 
+                 TypeSystem`NestedGrid`PackagePrivate`$NotCached, 
+                 TypeSystem`NestedGrid`PackagePrivate`renderedGrid, 
+                 TypeSystem`NestedGrid`PackagePrivate`renderGrid[
+                 TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                  TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                  TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
+                  TypeSystem`NestedGrid`PackagePrivate`$grid$$, 66256626][
+                 TypeSystem`NestedGrid`PackagePrivate`tmpData$]]; If[
+                Not[
+                 FailureQ[TypeSystem`NestedGrid`PackagePrivate`tmpGrid$]], 
+                TypeSystem`NestedGrid`PackagePrivate`renderedGrid = 
+                TypeSystem`NestedGrid`PackagePrivate`tmpGrid$]; Null]]; 
+           TypeSystem`NestedGrid`PackagePrivate`initialQ = False; 
+           TypeSystem`NestedGrid`PackagePrivate`$pos$$; If[
+             FailureQ[TypeSystem`NestedGrid`PackagePrivate`renderedGrid], 
+             TypeSystem`SparseGrid[
+              TypeSystem`H["(data no longer present)"]], 
+             If[GeneralUtilities`$DebugMode, 
+              Row[{TypeSystem`NestedGrid`PackagePrivate`renderedGrid, "  ", 
+                TypeSystem`NestedGrid`PackagePrivate`formatState[
+                TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                 TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                 TypeSystem`NestedGrid`PackagePrivate`$pos$$]}], 
+              TypeSystem`NestedGrid`PackagePrivate`renderedGrid]]], 
+          TrackedSymbols :> {TypeSystem`NestedGrid`PackagePrivate`$pos$$}], 
+         DynamicModuleValues :> {}], 
+       TypeSystem`NestedGrid`PackagePrivate`$posCell$$, 
+       TypeSystem`NestedGrid`PackagePrivate`$topBar$$ = Dynamic[
+         TypeSystem`NestedGrid`PackagePrivate`alignBar[
+         TypeSystem`NestedGrid`PackagePrivate`$state$$][
+          TypeSystem`NestedGrid`PackagePrivate`makeFramedBar[
+           TypeSystem`PackageScope`Pathbar[
+           TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+            TypeSystem`NestedGrid`PackagePrivate`updateState[
+            TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+             TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+             TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
+             TypeSystem`NestedGrid`PackagePrivate`$grid$$, 66256626]]]], 
+         TrackedSymbols :> {TypeSystem`NestedGrid`PackagePrivate`$path$$}], 
+       TypeSystem`NestedGrid`PackagePrivate`$bottomBar$$ = Framed[
+         Dynamic[
+          Replace[
+           MouseAnnotation[Null], {
+           TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][Null] -> 
+            "", TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[66256626][
+              Pattern[TypeSystem`NestedGrid`PackagePrivate`path, 
+               Blank[]]] :> (
+             TypeSystem`NestedGrid`PackagePrivate`$lastPath = 
+              TypeSystem`NestedGrid`PackagePrivate`path; 
+             TypeSystem`NestedGrid`PackagePrivate`makePathTrail[
+              TypeSystem`NestedGrid`PackagePrivate`path, 
+               TypeSystem`NestedGrid`PackagePrivate`makePathElements]), Null :> 
+            Spacer[10], Blank[] :> Spacer[10]}], TrackedSymbols :> {}], 
+         FrameStyle -> None, ImageMargins -> 0, FrameMargins -> 0, Alignment -> 
+         Top, ImageSize -> {Automatic, 14}]}, 
+      DynamicBox[
+       ToBoxes[
+        Column[
+         If[TypeSystem`NestedGrid`PackagePrivate`$path$$ == {}, {
+           TypeSystem`NestedGrid`PackagePrivate`displayScrollBar[
+           TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+            TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+            TypeSystem`NestedGrid`PackagePrivate`$pos$$], 
+           TypeSystem`NestedGrid`PackagePrivate`onDesktopShow[
+            TypeSystem`NestedGrid`PackagePrivate`alignBar[
+            TypeSystem`NestedGrid`PackagePrivate`$state$$][
+            TypeSystem`NestedGrid`PackagePrivate`$bottomBar$$]]}, {
+          TypeSystem`NestedGrid`PackagePrivate`$topBar$$, 
+           TypeSystem`NestedGrid`PackagePrivate`displayScrollBar[
+           TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+            TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+            TypeSystem`NestedGrid`PackagePrivate`$pos$$], 
+           TypeSystem`NestedGrid`PackagePrivate`onDesktopShow[
+            TypeSystem`NestedGrid`PackagePrivate`alignBar[
+            TypeSystem`NestedGrid`PackagePrivate`$state$$][
+            TypeSystem`NestedGrid`PackagePrivate`$bottomBar$$]]}], Spacings -> 
+         If[TypeSystem`NestedGrid`PackagePrivate`$path$$ == {}, 
+           0, {{}, {0, 0.05, 0}}]], StandardForm], 
+       ImageSizeCache -> {1063., {67., 73.}}, 
+       TrackedSymbols :> {
+        TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+         TypeSystem`NestedGrid`PackagePrivate`$grid$$}], 
+      BaseStyle -> {LineBreakWithin -> False}, Deinitialization :> 
+      TypeSystem`NestedGrid`PackagePrivate`deleteState[
+       TypeSystem`NestedGrid`PackagePrivate`$state$$], 
+      DynamicModuleValues :> {}, Initialization :> 
+      Block[{$ContextPath = $ContextPath}, 
+        Needs["TypeSystem`"]]], Deploy, DefaultBaseStyle -> "Deploy"]},
+   "CopyTag",
+   DisplayFunction->(#& ),
+   InterpretationFunction->("Dataset[<>]"& )],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{4.0011588665495386`*^9},
+ CellLabel->
+  "Out[695]=",ExpressionUUID->"35681877-0739-4bd4-927d-0ab933dc4294"]
+}, Open  ]],
+
+Cell["\<\
+Verification notes: A) The ordering of qubits in the user-provided Pauli code \
+is assumed Q1..Q9 from left to right; the measurement outcome index is Q1 \
+least significant, matching the user's nested x loop. B) The exact definition \
+of D*_d and the normalization of Gamma when identical swapped states occur \
+should be checked against an author-verified small-N case before interpreting \
+the experimental result as a rigorous witness. C) Ten user paths were all \
+rep0; the code uses rep0..rep9 placeholders that must match real folders. D) \
+Mathematica has not been executed in this environment.\
+\>", "Text",ExpressionUUID->"62f527cd-1d6f-49ac-b7e0-af31872b314e"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["8. S11 high-depth d=5..9: independent Gamma-set bounds", "Section",ExpressionUUID->"195c3e03-a490-4e62-955f-e3c1fa88085c"],
+
+Cell["\<\
+Eq. S11 for ellOmega=9, j=4: LEFT = (SumOmega Abs[W4] - 28*SumOmega Sqrt[p_m \
+p_n])/252. RIGHT = epsilonGamma1 + (1/9) epsilonGammaHat[d], with \
+epsilonGamma1 from Gamma_(1D)^(Omega,1), and GammaHat[d] = \
+Gamma_((N-1)D)^(Omega,1) SET DIFFERENCE Gamma_(dD)^(Omega,1). For the four \
+complementary state pairs, all 9 qubits differ so the full-system observable \
+W4 may be used. Gamma sets are state-weight dictionaries, NOT joint-pair \
+Upsilon sets.\
+\>", "Text",ExpressionUUID->"27c0774a-4b1c-44bf-b35a-a8591dc9ef7c"],
+
+Cell[BoxData[
+ RowBox[{"\n", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"ClearAll", "[", 
+     RowBox[{
+     "referenceGamma1", ",", " ", "gammaHatS11", ",", " ", "oneS11", ",", " ",
+       "allS11", ",", "\n", "         ", "compareAllDepths", ",", " ", 
+      "allRepetitionsBoth"}], "]"}], ";"}], "\n", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "Reuse", " ", "gammaD", " ", "and", " ", "associated", " ", "operations", 
+     " ", "from", " ", "Section", " ", "4."}], " ", "*)"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"referenceGamma1", "[", "]"}], " ", ":=", " ", 
+     RowBox[{
+      RowBox[{"referenceGamma1", "[", "]"}], " ", "=", " ", 
+      RowBox[{"gammaD", "[", 
+       RowBox[{"1", ",", "1"}], "]"}]}]}], ";"}], "\n", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+     RowBox[{"Paper", ":", " ", 
+      RowBox[{"overlined", " ", "Gamma_dD"}]}], " ", "=", " ", 
+     RowBox[{"Gamma_", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"N", "-", "1"}], ",", "D"}], ")"}], " ", "\\", " ", 
+       RowBox[{"Gamma_dD", ".", "\n", "   ", "The"}]}], " ", "set", " ", 
+      "difference", " ", "removes", " ", "keys", " ", "in", " ", "Gamma_dD", 
+      " ", 
+      RowBox[{"entirely", "."}]}]}], " ", "*)"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"gammaHatS11", "[", "d_Integer", "]"}], " ", ":=", "\n", " ", 
+     RowBox[{
+      RowBox[{"gammaHatS11", "[", "d", "]"}], " ", "=", "\n", "   ", 
+      RowBox[{"KeySelect", "[", 
+       RowBox[{
+        RowBox[{"gammaD", "[", 
+         RowBox[{"8", ",", "1"}], "]"}], ",", 
+        RowBox[{
+         RowBox[{"!", 
+          RowBox[{"KeyExistsQ", "[", 
+           RowBox[{
+            RowBox[{"gammaD", "[", 
+             RowBox[{"d", ",", "1"}], "]"}], ",", "#"}], "]"}]}], "&"}]}], 
+       "]"}]}]}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"oneS11", "[", 
+      RowBox[{"d_Integer", ",", "corr_List", ",", "p_List"}], "]"}], " ", ":=",
+      "\n", " ", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"wv", ",", "L", ",", "e", ",", "eHat", ",", "R"}], "}"}], ",",
+        "\n", "  ", 
+       RowBox[{
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"!", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"5", "<=", "d", "<=", "9"}], " ", "&&", " ", 
+             RowBox[{
+              RowBox[{"Length", "[", "corr", "]"}], ">=", "340"}], " ", "&&", 
+             " ", 
+             RowBox[{
+              RowBox[{"Length", "[", "p", "]"}], "==", "512"}], "\n", 
+             "      ", "&&", 
+             RowBox[{"VectorQ", "[", 
+              RowBox[{"corr", ",", "NumericQ"}], "]"}], "&&", 
+             RowBox[{"VectorQ", "[", 
+              RowBox[{"p", ",", "NumericQ"}], "]"}]}], ")"}]}], ",", "\n", 
+          "   ", 
+          RowBox[{"Return", "[", 
+           RowBox[{"Failure", "[", 
+            RowBox[{"\"\<BadS11Input\>\"", ",", 
+             RowBox[{"<|", "|>"}]}], "]"}], "]"}]}], "]"}], ";", "\n", "  ", 
+        RowBox[{"wv", "=", 
+         RowBox[{"allW", "[", 
+          RowBox[{"4", ",", "corr"}], "]"}]}], ";", "\n", "  ", 
+        RowBox[{"L", "=", 
+         RowBox[{"N", "[", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"Total", "[", 
+              RowBox[{"Abs", "[", "wv", "]"}], "]"}], "-", 
+             RowBox[{"28", " ", 
+              RowBox[{"pairPopulation", "[", "p", "]"}]}]}], ")"}], "/", 
+           "252"}], "]"}]}], ";", "\n", "  ", 
+        RowBox[{"e", "=", 
+         RowBox[{"N", "[", 
+          RowBox[{"epsGamma", "[", 
+           RowBox[{
+            RowBox[{"referenceGamma1", "[", "]"}], ",", "p"}], "]"}], "]"}]}],
+         ";", "\n", "  ", 
+        RowBox[{"eHat", "=", 
+         RowBox[{"N", "[", 
+          RowBox[{"epsGamma", "[", 
+           RowBox[{
+            RowBox[{"gammaHatS11", "[", "d", "]"}], ",", "p"}], "]"}], 
+          "]"}]}], ";", "\n", "  ", 
+        RowBox[{"R", "=", 
+         RowBox[{"N", "[", 
+          RowBox[{"e", "+", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"1", "/", "9"}], ")"}], "eHat"}]}], "]"}]}], ";", "\n", 
+        "  ", 
+        RowBox[{"<|", 
+         RowBox[{
+          RowBox[{"\"\<d\>\"", "->", "d"}], ",", 
+          RowBox[{"\"\<Equation\>\"", "->", "\"\<S11\>\""}], ",", 
+          RowBox[{"\"\<W(1,8)\>\"", "->", 
+           RowBox[{"N", "[", 
+            RowBox[{"wv", "[", 
+             RowBox[{"[", "1", "]"}], "]"}], "]"}]}], ",", "\n", "   ", 
+          RowBox[{"\"\<W(2,7)\>\"", "->", 
+           RowBox[{"N", "[", 
+            RowBox[{"wv", "[", 
+             RowBox[{"[", "2", "]"}], "]"}], "]"}]}], ",", 
+          RowBox[{"\"\<W(3,6)\>\"", "->", 
+           RowBox[{"N", "[", 
+            RowBox[{"wv", "[", 
+             RowBox[{"[", "3", "]"}], "]"}], "]"}]}], ",", "\n", "   ", 
+          RowBox[{"\"\<W(4,5)\>\"", "->", 
+           RowBox[{"N", "[", 
+            RowBox[{"wv", "[", 
+             RowBox[{"[", "4", "]"}], "]"}], "]"}]}], ",", "\n", "   ", 
+          RowBox[{"\"\<LEFT\>\"", "->", "L"}], ",", 
+          RowBox[{"\"\<EpsilonGamma1\>\"", "->", "e"}], ",", 
+          RowBox[{"\"\<EpsilonGammaHat\>\"", "->", "eHat"}], ",", "\n", "   ", 
+          RowBox[{"\"\<RIGHT\>\"", "->", "R"}], ",", 
+          RowBox[{"\"\<Delta\>\"", "->", 
+           RowBox[{"N", "[", 
+            RowBox[{"L", "-", "R"}], "]"}]}], ",", "\n", "   ", 
+          RowBox[{"\"\<ViolationQ\>\"", "->", 
+           RowBox[{"TrueQ", "[", 
+            RowBox[{"L", ">", "R"}], "]"}]}], ",", "\n", "   ", 
+          RowBox[{"\"\<GammaReferenceKeys\>\"", "->", 
+           RowBox[{"Length", "[", 
+            RowBox[{"referenceGamma1", "[", "]"}], "]"}]}], ",", "\n", "   ", 
+          RowBox[{"\"\<GammaHatKeys\>\"", "->", 
+           RowBox[{"Length", "[", 
+            RowBox[{"gammaHatS11", "[", "d", "]"}], "]"}]}]}], "|>"}]}]}], 
+      "\n", " ", "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"allS11", "[", 
+      RowBox[{"corr_List", ",", "p_List"}], "]"}], " ", ":=", "\n", " ", 
+     RowBox[{"Dataset", "[", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"oneS11", "[", 
+         RowBox[{"d", ",", "corr", ",", "p"}], "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"d", ",", "5", ",", "9"}], "}"}]}], "]"}], "]"}]}], ";"}], 
+   "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"compareAllDepths", "[", 
+      RowBox[{"hh_Integer", ",", "corr_List", ",", "p_List"}], "]"}], " ", ":=",
+      "\n", " ", 
+     RowBox[{"Dataset", "[", 
+      RowBox[{"Join", "[", "\n", "  ", 
+       RowBox[{
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"Join", "[", 
+           RowBox[{
+            RowBox[{"<|", 
+             RowBox[{"\"\<Equation\>\"", "->", "\"\<S36\>\""}], "|>"}], ",", 
+            "\n", "    ", 
+            RowBox[{"oneS36", "[", 
+             RowBox[{"d", ",", "hh", ",", "corr", ",", "p"}], "]"}]}], "]"}], 
+          ",", 
+          RowBox[{"{", 
+           RowBox[{"d", ",", "1", ",", "4"}], "}"}]}], "]"}], ",", "\n", "  ", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"oneS11", "[", 
+           RowBox[{"d", ",", "corr", ",", "p"}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"d", ",", "5", ",", "9"}], "}"}]}], "]"}]}], "]"}], 
+      "]"}]}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"allRepetitionsBoth", "[", 
+      RowBox[{"folderList_List", ",", 
+       RowBox[{"hh_Integer:", "1"}]}], "]"}], " ", ":=", "\n", " ", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"records", "=", 
+          RowBox[{"{", "}"}]}], ",", "raw", ",", "corr", ",", "p"}], "}"}], 
+       ",", "\n", " ", 
+       RowBox[{
+        RowBox[{"Do", "[", "\n", "  ", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"raw", "=", 
+            RowBox[{"loadRep", "[", 
+             RowBox[{"folderList", "[", 
+              RowBox[{"[", "rep", "]"}], "]"}], "]"}]}], ";", "\n", "  ", 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"Head", "[", "raw", "]"}], "===", "Failure"}], ",", 
+             "\n", "    ", 
+             RowBox[{
+              RowBox[{"AppendTo", "[", 
+               RowBox[{"records", ",", 
+                RowBox[{"<|", 
+                 RowBox[{
+                  RowBox[{"\"\<Repeat\>\"", "->", "rep"}], ",", 
+                  RowBox[{"\"\<Error\>\"", "->", "raw"}]}], "|>"}]}], "]"}], 
+              ";", "\n", "    ", 
+              RowBox[{"Continue", "[", "]"}]}]}], "]"}], ";", "\n", "  ", 
+           RowBox[{"corr", "=", 
+            RowBox[{"correlators", "[", "raw", "]"}]}], ";", 
+           RowBox[{"p", "=", 
+            RowBox[{"computationalProbabilities", "[", "raw", "]"}]}], ";", 
+           "\n", "  ", 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{"Head", "[", "corr", "]"}], "===", "Failure"}], "||", 
+              RowBox[{
+               RowBox[{"Head", "[", "p", "]"}], "===", "Failure"}]}], ",", 
+             "\n", "    ", 
+             RowBox[{
+              RowBox[{"AppendTo", "[", 
+               RowBox[{"records", ",", 
+                RowBox[{"<|", 
+                 RowBox[{
+                  RowBox[{"\"\<Repeat\>\"", "->", "rep"}], ",", "\n", 
+                  "      ", 
+                  RowBox[{
+                  "\"\<Error\>\"", "->", "\"\<Bad experiment file\>\""}]}], 
+                 "|>"}]}], "]"}], ";", "\n", "    ", 
+              RowBox[{"Continue", "[", "]"}]}]}], "]"}], ";", "\n", "  ", 
+           RowBox[{"records", "=", 
+            RowBox[{"Join", "[", 
+             RowBox[{"records", ",", 
+              RowBox[{"Table", "[", "\n", "     ", 
+               RowBox[{
+                RowBox[{"Join", "[", 
+                 RowBox[{
+                  RowBox[{"<|", 
+                   RowBox[{
+                    RowBox[{"\"\<Repeat\>\"", "->", "rep"}], ",", 
+                    RowBox[{"\"\<Equation\>\"", "->", "\"\<S36\>\""}]}], 
+                   "|>"}], ",", "\n", "       ", 
+                  RowBox[{"oneS36", "[", 
+                   RowBox[{"d", ",", "hh", ",", "corr", ",", "p"}], "]"}]}], 
+                 "]"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"d", ",", "1", ",", "4"}], "}"}]}], "]"}], ",", "\n",
+               "    ", 
+              RowBox[{"Table", "[", 
+               RowBox[{
+                RowBox[{"Join", "[", 
+                 RowBox[{
+                  RowBox[{"<|", 
+                   RowBox[{"\"\<Repeat\>\"", "->", "rep"}], "|>"}], ",", "\n",
+                   "       ", 
+                  RowBox[{"oneS11", "[", 
+                   RowBox[{"d", ",", "corr", ",", "p"}], "]"}]}], "]"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"d", ",", "5", ",", "9"}], "}"}]}], "]"}]}], 
+             "]"}]}]}], ",", "\n", "  ", 
+          RowBox[{"{", 
+           RowBox[{"rep", ",", 
+            RowBox[{"Length", "[", "folderList", "]"}]}], "}"}]}], "]"}], ";",
+         "\n", " ", 
+        RowBox[{"Dataset", "[", "records", "]"}]}]}], "]"}]}], ";"}], 
+   "\n"}]}]], "Input",ExpressionUUID->"1d6f9615-8f86-4eb6-bcd4-03fcff114101"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+9. Worked ideal-state and experimental examples covering d=1..9\
+\>", "Section",ExpressionUUID->"821585f9-3682-4973-b488-cc6c155afff4"],
+
+Cell[BoxData[
+ RowBox[{"\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Run", " ", "Section", " ", "7", " ", "once", " ", "to", " ", "define", 
+    " ", "idealCorr", " ", "and", " ", 
+    RowBox[{"idealP", "."}]}], " ", "*)"}], "\n", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+    "Print", "[", "\"\<S11 high-depth comparison (ideal CL9):\>\"", "]"}], 
+    ";"}], "\n", 
+   RowBox[{"allS11", "[", 
+    RowBox[{"idealCorr", ",", "idealP"}], "]"}], "\n", 
+   RowBox[{
+    RowBox[{"Print", "[", "\"\<S36 + S11 comparison (ideal CL9):\>\"", "]"}], 
+    ";"}], "\n", 
+   RowBox[{"compareAllDepths", "[", 
+    RowBox[{"1", ",", "idealCorr", ",", "idealP"}], "]"}], "\n", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+      "To", " ", "read", " ", "10", " ", "independent", " ", "real", " ", 
+       "experimental", " ", 
+       RowBox[{"repetitions", ":", "\n", "  ", "resultsBoth"}]}], "=", 
+      RowBox[{"allRepetitionsBoth", "[", 
+       RowBox[{"folders", ",", "1"}], "]"}]}], ";", "\n", "  ", 
+     "resultsBoth"}], "\n", "*)"}], "\n"}]}]], "Input",ExpressionUUID->\
+"5f5d522e-652d-48d8-9354-2aa72b5e8858"],
+
+Cell["\<\
+Important: the right side of S11 uses state-number-pair Gamma weights, not \
+S36's joint-number-pair Upsilon weights. Confirm d=N interpretation and Gamma \
+weighted state-difference convention with the full paper before publication. \
+This notebook was not executed in a Wolfram Mathematica kernel; local \
+experiment files are necessary to obtain experimental numerical results.\
+\>", "Text",ExpressionUUID->"9551cb8b-4757-4d2b-8a40-8910921583ab"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["10. k-separability, k=3..8 (paper S36 substitution)", "Section",ExpressionUUID->"1436e37d-4217-42c6-b390-fa9ca4e740fa"],
+
+Cell["\<\
+For k-separability replace D*_d by S*_k in the Upsilon construction, and the \
+reference Upsilon_(1D)^(Omega,Floor[N/2]) by Upsilon_(1S)^(Omega,Floor[N/2]). \
+Both epsilon terms use JOINT-state-pair Upsilon, not Gamma. Coefficients add \
+within each partition and are maximized over partitions. S*_k here enumerates \
+all partitions into exactly k nonempty blocks. k=3..8 and h=1 or h=2 are \
+supported.\
+\>", "Text",ExpressionUUID->"61a017df-8e43-4c9a-bd3d-51030f097ee2"],
+
+Cell[BoxData[
+ RowBox[{"\n", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"ClearAll", "[", 
+     RowBox[{
+     "kPartitions9", ",", "kUpsilon9", ",", "kReference9", ",", "kHat9", ",", 
+      "kC9", ",", "\n", "  ", "oneKS9", ",", "allKS9", ",", 
+      "allRepeatedKS9"}], "]"}], ";"}], "\n", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+     RowBox[{"Exactly", " ", "k", " ", "blocks"}], ",", " ", 
+     RowBox[{"unconstrained", " ", "block", " ", 
+      RowBox[{"sizes", "."}]}]}], " ", "*)"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"kPartitions9", "[", 
+       RowBox[{"k_Integer", "?", "Positive"}], "]"}], " ", "/;", " ", 
+      RowBox[{"1", "<=", "k", "<=", "9"}]}], " ", ":=", "\n", " ", 
+     RowBox[{
+      RowBox[{"kPartitions9", "[", "k", "]"}], " ", "=", "\n", "   ", 
+      RowBox[{"Select", "[", 
+       RowBox[{
+        RowBox[{"boundedPartitions", "[", 
+         RowBox[{"9", ",", "9"}], "]"}], ",", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Length", "[", "#", "]"}], "==", "k"}], "&"}]}], "]"}]}]}], 
+    ";"}], "\n", "\n", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+     RowBox[{
+     "Each", " ", "partition", " ", "uses", " ", "the", " ", "previously", 
+      " ", "defined", " ", 
+      RowBox[{"Gamma", "/", "Upsilon"}], " ", 
+      RowBox[{"generator", ".", "\n", "   ", "Only"}], " ", "joint"}], "-", 
+     RowBox[{"pair", " ", "Upsilon", " ", 
+      RowBox[{"component", " ", "[", 
+       RowBox[{"[", "2", "]"}], "]"}], " ", "is", " ", 
+      RowBox[{"used", "."}]}]}], " ", "*)"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"kUpsilon9", "[", 
+      RowBox[{"k_Integer", ",", "hh_Integer"}], "]"}], " ", ":=", "\n", " ", 
+     RowBox[{
+      RowBox[{"kUpsilon9", "[", 
+       RowBox[{"k", ",", "hh"}], "]"}], " ", "=", "\n", " ", 
+      RowBox[{"associationMax", "[", "\n", "   ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"gammaUpsilonForPartition", "[", 
+            RowBox[{"#", ",", "hh"}], "]"}], "[", 
+           RowBox[{"[", "2", "]"}], "]"}], " ", "&"}], " ", "/@", " ", 
+         RowBox[{"kPartitions9", "[", "k", "]"}]}], ")"}], "]"}]}]}], ";"}], 
+   "\n", "\n", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Special", " ", "reference", " ", "1"}], "-", 
+      RowBox[{"separable", " ", 
+       RowBox[{"construction", ":", " ", 
+        RowBox[{"nine", " ", "singleton", " ", "blocks"}]}]}]}], ",", "\n", 
+     "   ", 
+     RowBox[{
+      RowBox[{"allow", " ", "up", " ", "to", " ", 
+       RowBox[{"Floor", "[", 
+        RowBox[{"9", "/", "2"}], "]"}]}], "=", 
+      RowBox[{"4", " ", "swapped", " ", 
+       RowBox[{"blocks", "."}]}]}]}], " ", "*)"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"kReference9", "[", "]"}], " ", ":=", "\n", " ", 
+     RowBox[{
+      RowBox[{"kReference9", "[", "]"}], " ", "=", "\n", " ", 
+      RowBox[{
+       RowBox[{"gammaUpsilonForPartition", "[", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"{", "#", "}"}], "&"}], "/@", 
+           RowBox[{"Range", "[", "9", "]"}]}], ")"}], ",", 
+         RowBox[{"Floor", "[", 
+          RowBox[{"9", "/", "2"}], "]"}]}], "]"}], "[", 
+       RowBox[{"[", "2", "]"}], "]"}]}]}], ";"}], "\n", "\n", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+     RowBox[{"Set", " ", 
+      RowBox[{"difference", ":", " ", 
+       RowBox[{
+       "delete", " ", "ALL", " ", "shared", " ", "pair", " ", "keys"}]}]}], 
+     ",", " ", 
+     RowBox[{"never", " ", "subtract", " ", 
+      RowBox[{"weights", "."}]}]}], " ", "*)"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"kHat9", "[", 
+      RowBox[{"k_Integer", ",", "hh_Integer"}], "]"}], " ", ":=", "\n", " ", 
+     RowBox[{
+      RowBox[{"kHat9", "[", 
+       RowBox[{"k", ",", "hh"}], "]"}], " ", "=", "\n", " ", 
+      RowBox[{"KeySelect", "[", 
+       RowBox[{
+        RowBox[{"kReference9", "[", "]"}], ",", 
+        RowBox[{
+         RowBox[{"!", 
+          RowBox[{"KeyExistsQ", "[", 
+           RowBox[{
+            RowBox[{"kUpsilon9", "[", 
+             RowBox[{"k", ",", "hh"}], "]"}], ",", "#"}], "]"}]}], "&"}]}], 
+       "]"}]}]}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"kC9", "[", 
+      RowBox[{"k_Integer", ",", "hh_Integer"}], "]"}], " ", ":=", "\n", " ", 
+     RowBox[{"Sum", "[", 
+      RowBox[{
+       RowBox[{"Binomial", "[", 
+        RowBox[{"k", ",", "u"}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"u", ",", "1", ",", 
+         RowBox[{"Min", "[", 
+          RowBox[{"k", ",", "hh"}], "]"}]}], "}"}]}], "]"}]}], ";"}], "\n", 
+   "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"oneKS9", "[", 
+      RowBox[{
+      "k_Integer", ",", "hh_Integer", ",", "corr_List", ",", "p_List"}], 
+      "]"}], " ", ":=", "\n", " ", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"wv", ",", "C", ",", 
+         RowBox[{"f", "=", "14"}], ",", "den", ",", "left", ",", "right", ",",
+          "e", ",", "eHat", ",", "pairPop"}], "}"}], ",", "\n", "  ", 
+       RowBox[{
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"!", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"3", "<=", "k", "<=", "8"}], "&&", 
+             RowBox[{"hh", ">=", "1"}], "&&", 
+             RowBox[{
+              RowBox[{"Length", "[", "corr", "]"}], ">=", "340"}], "&&", "\n",
+              "        ", 
+             RowBox[{
+              RowBox[{"Length", "[", "p", "]"}], "==", "512"}], "&&", 
+             RowBox[{"VectorQ", "[", 
+              RowBox[{"corr", ",", "NumericQ"}], "]"}], "&&", "\n", 
+             "        ", 
+             RowBox[{"VectorQ", "[", 
+              RowBox[{"p", ",", "NumericQ"}], "]"}], "&&", 
+             RowBox[{
+              RowBox[{"Min", "[", "p", "]"}], ">=", "0"}]}], ")"}]}], ",", 
+          "\n", "   ", 
+          RowBox[{"Return", "[", 
+           RowBox[{"Failure", "[", 
+            RowBox[{"\"\<BadInput\>\"", ",", 
+             RowBox[{"<|", "|>"}]}], "]"}], "]"}]}], "]"}], ";", "\n", "  ", 
+        RowBox[{"wv", "=", 
+         RowBox[{"allW", "[", 
+          RowBox[{"4", ",", "corr"}], "]"}]}], ";", "\n", "  ", 
+        RowBox[{"C", "=", 
+         RowBox[{"kC9", "[", 
+          RowBox[{"k", ",", "hh"}], "]"}]}], ";", 
+        RowBox[{"den", "=", 
+         RowBox[{"126", "+", 
+          RowBox[{"f", 
+           RowBox[{"(", 
+            RowBox[{"C", "-", "1"}], ")"}]}]}]}], ";", "\n", "  ", 
+        RowBox[{"pairPop", "=", 
+         RowBox[{"pairPopulation", "[", "p", "]"}]}], ";", "\n", "  ", 
+        RowBox[{"left", "=", 
+         RowBox[{"N", "[", 
+          RowBox[{"C", "*", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"Total", "[", 
+               RowBox[{"Abs", "[", "wv", "]"}], "]"}], "-", 
+              RowBox[{"2", " ", "f", " ", "pairPop"}]}], ")"}], "/", 
+            RowBox[{"(", "den", ")"}]}]}], "]"}]}], ";", "\n", "  ", 
+        RowBox[{"e", "=", 
+         RowBox[{"N", "[", 
+          RowBox[{"epsUpsilon", "[", 
+           RowBox[{
+            RowBox[{"kUpsilon9", "[", 
+             RowBox[{"k", ",", "hh"}], "]"}], ",", "p"}], "]"}], "]"}]}], ";",
+         "\n", "  ", 
+        RowBox[{"eHat", "=", 
+         RowBox[{"N", "[", 
+          RowBox[{"epsUpsilon", "[", 
+           RowBox[{
+            RowBox[{"kHat9", "[", 
+             RowBox[{"k", ",", "hh"}], "]"}], ",", "p"}], "]"}], "]"}]}], ";",
+         "\n", "  ", 
+        RowBox[{"right", "=", 
+         RowBox[{"N", "[", 
+          RowBox[{"e", "+", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"f", " ", 
+              RowBox[{"C", "/", "den"}]}], ")"}], "*", "eHat"}]}], "]"}]}], 
+        ";", "\n", "  ", 
+        RowBox[{"<|", 
+         RowBox[{
+          RowBox[{"\"\<k\>\"", "->", "k"}], ",", 
+          RowBox[{"\"\<h\>\"", "->", "hh"}], ",", 
+          RowBox[{"\"\<C_k_h\>\"", "->", "C"}], ",", 
+          RowBox[{"\"\<SumAbsW\>\"", "->", 
+           RowBox[{"N", "[", 
+            RowBox[{"Total", "[", 
+             RowBox[{"Abs", "[", "wv", "]"}], "]"}], "]"}]}], ",", "\n", 
+          "    ", 
+          RowBox[{"\"\<Epsilon\>\"", "->", "e"}], ",", 
+          RowBox[{"\"\<EpsilonHat\>\"", "->", "eHat"}], ",", "\n", "    ", 
+          RowBox[{"\"\<LEFT\>\"", "->", "left"}], ",", 
+          RowBox[{"\"\<RIGHT\>\"", "->", "right"}], ",", "\n", "    ", 
+          RowBox[{"\"\<Delta\>\"", "->", 
+           RowBox[{"left", "-", "right"}]}], ",", 
+          RowBox[{"\"\<ViolationQ\>\"", "->", 
+           RowBox[{"TrueQ", "[", 
+            RowBox[{"left", ">", "right"}], "]"}]}], ",", "\n", "    ", 
+          RowBox[{"\"\<PartitionCount\>\"", "->", 
+           RowBox[{"Length", "[", 
+            RowBox[{"kPartitions9", "[", "k", "]"}], "]"}]}]}], "|>"}]}]}], 
+      "\n", " ", "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"allKS9", "[", 
+      RowBox[{"hh_Integer", ",", "corr_List", ",", "p_List"}], "]"}], " ", ":=",
+      "\n", " ", 
+     RowBox[{"Dataset", "[", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"oneKS9", "[", 
+         RowBox[{"k", ",", "hh", ",", "corr", ",", "p"}], "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"k", ",", "3", ",", "8"}], "}"}]}], "]"}], "]"}]}], ";"}], 
+   "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"allRepeatedKS9", "[", 
+      RowBox[{"folderList_List", ",", 
+       RowBox[{"hh_Integer:", "1"}]}], "]"}], " ", ":=", "\n", " ", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"rows", "=", 
+          RowBox[{"{", "}"}]}], ",", "raw", ",", "corr", ",", "p"}], "}"}], 
+       ",", "\n", "  ", 
+       RowBox[{
+        RowBox[{"Do", "[", "\n", "   ", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"raw", "=", 
+            RowBox[{"loadRep", "[", 
+             RowBox[{"folderList", "[", 
+              RowBox[{"[", "rep", "]"}], "]"}], "]"}]}], ";", "\n", "   ", 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"Head", "[", "raw", "]"}], "===", "Failure"}], ",", 
+             "\n", "    ", 
+             RowBox[{
+              RowBox[{"AppendTo", "[", 
+               RowBox[{"rows", ",", 
+                RowBox[{"<|", 
+                 RowBox[{
+                  RowBox[{"\"\<Repeat\>\"", "->", "rep"}], ",", 
+                  RowBox[{"\"\<Error\>\"", "->", "raw"}]}], "|>"}]}], "]"}], 
+              ";", 
+              RowBox[{"Continue", "[", "]"}]}]}], "]"}], ";", "\n", "   ", 
+           RowBox[{"corr", "=", 
+            RowBox[{"correlators", "[", "raw", "]"}]}], ";", "\n", "   ", 
+           RowBox[{"p", "=", 
+            RowBox[{"computationalProbabilities", "[", "raw", "]"}]}], ";", 
+           "\n", "   ", 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{"Head", "[", "corr", "]"}], "===", "Failure"}], "||", 
+              RowBox[{
+               RowBox[{"Head", "[", "p", "]"}], "===", "Failure"}]}], ",", 
+             "\n", "    ", 
+             RowBox[{
+              RowBox[{"AppendTo", "[", 
+               RowBox[{"rows", ",", 
+                RowBox[{"<|", 
+                 RowBox[{
+                  RowBox[{"\"\<Repeat\>\"", "->", "rep"}], ",", "\n", 
+                  "      ", 
+                  RowBox[{
+                  "\"\<Error\>\"", "->", "\"\<Invalid measured rows\>\""}]}], 
+                 "|>"}]}], "]"}], ";", 
+              RowBox[{"Continue", "[", "]"}]}]}], "]"}], ";", "\n", "   ", 
+           RowBox[{"rows", "=", 
+            RowBox[{"Join", "[", 
+             RowBox[{"rows", ",", 
+              RowBox[{"Table", "[", "\n", "     ", 
+               RowBox[{
+                RowBox[{"Join", "[", 
+                 RowBox[{
+                  RowBox[{"<|", 
+                   RowBox[{"\"\<Repeat\>\"", "->", "rep"}], "|>"}], ",", 
+                  RowBox[{"oneKS9", "[", 
+                   RowBox[{"k", ",", "hh", ",", "corr", ",", "p"}], "]"}]}], 
+                 "]"}], ",", "\n", "     ", 
+                RowBox[{"{", 
+                 RowBox[{"k", ",", "3", ",", "8"}], "}"}]}], "]"}]}], 
+             "]"}]}]}], ",", "\n", "   ", 
+          RowBox[{"{", 
+           RowBox[{"rep", ",", 
+            RowBox[{"Length", "[", "folderList", "]"}]}], "}"}]}], "]"}], ";",
+         "\n", " ", 
+        RowBox[{"Dataset", "[", "rows", "]"}]}]}], "\n", " ", "]"}]}], ";"}], 
+   "\n"}]}]], "Input",
+ CellChangeTimes->{
+  4.0011590081117077`*^9},ExpressionUUID->"579d8fbb-f3bb-4a88-a7bb-\
+e5b4b8dc271b"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["11. Examples: k-separability and corrected S36", "Section",ExpressionUUID->"9054be2c-76e2-458f-a073-b9f78811911d"],
+
+Cell[BoxData[
+ RowBox[{"\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "First", " ", "evaluate", " ", "the", " ", "earlier", " ", "notebook", " ",
+     "cells", " ", "to", " ", "define", " ", "idealCorr", " ", "and", " ", 
+    RowBox[{"idealP", "."}]}], " ", "*)"}], "\n", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Print", "[", "\"\<k-separability (ideal CL9, h=1):\>\"", "]"}], 
+    ";"}], "\n", 
+   RowBox[{"allKS9", "[", 
+    RowBox[{"1", ",", "idealCorr", ",", "idealP"}], "]"}], "\n", 
+   RowBox[{
+    RowBox[{"Print", "[", "\"\<k-separability (ideal CL9, h=2):\>\"", "]"}], 
+    ";"}], "\n", 
+   RowBox[{"allKS9", "[", 
+    RowBox[{"2", ",", "idealCorr", ",", "idealP"}], "]"}], "\n", "\n", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+     RowBox[{"Experiment", ":", " ", 
+      RowBox[{"supply", " ", "ten", " ", "real"}]}], ",", " ", 
+     RowBox[{"DISTINCT", " ", "folders", " ", "before", " ", 
+      RowBox[{"running", "."}]}]}], " ", "*)"}], "\n", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+     RowBox[{"measuredKS_h1", "=", 
+      RowBox[{"allRepeatedKS9", "[", 
+       RowBox[{"folders", ",", "1"}], "]"}]}], ";"}], " ", "*)"}], "\n", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+     RowBox[{"measuredKS_h2", "=", 
+      RowBox[{"allRepeatedKS9", "[", 
+       RowBox[{"folders", ",", "2"}], "]"}]}], ";"}], " ", "*)"}], "\n", 
+   RowBox[{"(*", " ", "measuredKS_h2", " ", "*)"}], "\n", "\n", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Show", " ", "the", " ", "corrected", " ", "S36", " ", "d"}], 
+      "-", 
+      RowBox[{"depth", " ", "rows"}]}], ",", " ", 
+     RowBox[{
+     "both", " ", "epsilon", " ", "terms", " ", "now", " ", "from", " ", 
+      "Upsilon"}]}], " ", "*)"}], "\n", 
+   RowBox[{"(*", " ", 
+    RowBox[{"allS36", "[", 
+     RowBox[{"2", ",", "idealCorr", ",", "idealP"}], "]"}], " ", "*)"}], 
+   "\n"}]}]], "Input",ExpressionUUID->"4f89b969-f564-49c6-be64-c63b021e9798"],
+
+Cell["\<\
+Accuracy caution: the Notation S3-S6 and S36 screenshot supports replacing \
+D*_d and 1D reference by S*_k and 1S reference. Full paper-specific S*_k \
+constraints and the half-subset convention (when h equals half the number of \
+blocks) require checking against a verified author example; this code \
+implements subset selection up to h without automatic halving. k=8,h=2 has \
+many partitions but is finite. No experiment files are available here, so \
+experimental LEFT/RIGHT numbers are not computed or claimed.\
+\>", "Text",ExpressionUUID->"05ca214f-eaae-41c0-862e-caf229d0447a"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1536, 887},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+WindowTitle->"CL9 4Y S36 S11 and k separability",
+FrontEndVersion->"12.0 for Microsoft Windows (64-bit) (2019\:5e744\:67088\
+\:65e5)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[627, 23, 129, 0, 156, "Title",ExpressionUUID->"a8f90798-86ab-42a6-9627-4fad6c4bd3ec"],
+Cell[759, 25, 384, 5, 78, "Text",ExpressionUUID->"5fa88eef-b7db-4061-85e8-5df4b15631ed"],
+Cell[CellGroupData[{
+Cell[1168, 34, 127, 0, 67, "Section",ExpressionUUID->"ba2753ac-01a5-4a0e-b7f9-306c17c0d611"],
+Cell[CellGroupData[{
+Cell[1320, 38, 8754, 201, 869, "Input",ExpressionUUID->"f51a8516-f0ac-4891-9c6a-3beee6890b9b"],
+Cell[CellGroupData[{
+Cell[10099, 243, 609, 15, 22, "Print",ExpressionUUID->"19838fa0-88f0-4776-b077-373739b32eee"],
+Cell[10711, 260, 2970, 72, 41, "Print",ExpressionUUID->"252c829b-4e64-486e-a0a5-4cac0bc3890d"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13742, 339, 130, 0, 67, "Section",ExpressionUUID->"71cd0b7b-53cf-4230-a2d1-869826698de2"],
+Cell[13875, 341, 7726, 199, 1034, "Input",ExpressionUUID->"95bb430d-d106-4283-a6b3-a3988b701c54"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21638, 545, 120, 0, 67, "Section",ExpressionUUID->"dcb2f887-6357-423a-a117-96d97a708393"],
+Cell[CellGroupData[{
+Cell[21783, 549, 5238, 160, 589, "Input",ExpressionUUID->"603b0aad-2a7e-4a9d-bf13-8d25a8824b8a"],
+Cell[27024, 711, 419, 10, 22, "Print",ExpressionUUID->"6d25afed-886a-468f-bd0c-67e53f057759"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[27492, 727, 183, 3, 67, "Section",ExpressionUUID->"d4be2f17-1282-41d2-b4e1-18ce58b7649d"],
+Cell[27678, 732, 477, 7, 56, "Text",ExpressionUUID->"dc5cee14-8d03-4005-b2a5-af97622d8a6e"],
+Cell[28158, 741, 16115, 447, 2113, "Input",ExpressionUUID->"ab035327-ab79-43f7-895f-8f01281cce36"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[44310, 1193, 118, 0, 67, "Section",ExpressionUUID->"1c0ebf21-4507-43b8-b435-7d1d342be1a7"],
+Cell[44431, 1195, 377, 5, 56, "Text",ExpressionUUID->"170bd431-628b-46ff-85bb-bfab61746b00"],
+Cell[44811, 1202, 5592, 141, 827, "Input",ExpressionUUID->"11f475f5-2264-4678-9182-bbafe3b6723f"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[50440, 1348, 109, 0, 67, "Section",ExpressionUUID->"0b79faa8-a5e4-460b-b51a-1ab777dc98d4"],
+Cell[50552, 1350, 3734, 94, 719, "Input",ExpressionUUID->"5daf48a0-d894-4ec3-8cae-451e4583c00c"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[54323, 1449, 131, 0, 67, "Section",ExpressionUUID->"f6ad90da-6b00-46bf-b28f-874c9f256630"],
+Cell[CellGroupData[{
+Cell[54479, 1453, 4669, 127, 663, "Input",ExpressionUUID->"426712aa-7df8-4e4e-9e24-023d0d960ff5"],
+Cell[CellGroupData[{
+Cell[59173, 1584, 327, 8, 22, "Print",ExpressionUUID->"e9681689-7ab2-4889-ae89-e9c2c657e18b"],
+Cell[59503, 1594, 423, 10, 22, "Print",ExpressionUUID->"4e393f1a-c435-472c-bd78-7700de713fdf"],
+Cell[59929, 1606, 394, 10, 40, "Print",ExpressionUUID->"c5b7f971-8a5b-4f2a-a147-7fd42cd67326"],
+Cell[60326, 1618, 219, 4, 22, "Print",ExpressionUUID->"659764dc-2556-40ce-9da8-09a5ed08fdcd"]
+}, Open  ]],
+Cell[60560, 1625, 55970, 1150, 159, "Output",ExpressionUUID->"35681877-0739-4bd4-927d-0ab933dc4294"]
+}, Open  ]],
+Cell[116545, 2778, 681, 9, 78, "Text",ExpressionUUID->"62f527cd-1d6f-49ac-b7e0-af31872b314e"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[117263, 2792, 128, 0, 67, "Section",ExpressionUUID->"195c3e03-a490-4e62-955f-e3c1fa88085c"],
+Cell[117394, 2794, 531, 8, 78, "Text",ExpressionUUID->"27c0774a-4b1c-44bf-b35a-a8591dc9ef7c"],
+Cell[117928, 2804, 11194, 282, 1779, "Input",ExpressionUUID->"1d6f9615-8f86-4eb6-bcd4-03fcff114101"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[129159, 3091, 145, 2, 67, "Section",ExpressionUUID->"821585f9-3682-4973-b488-cc6c155afff4"],
+Cell[129307, 3095, 1116, 29, 255, "Input",ExpressionUUID->"5f5d522e-652d-48d8-9354-2aa72b5e8858"],
+Cell[130426, 3126, 459, 6, 56, "Text",ExpressionUUID->"9551cb8b-4757-4d2b-8a40-8910921583ab"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[130922, 3137, 125, 0, 67, "Section",ExpressionUUID->"1436e37d-4217-42c6-b390-fa9ca4e740fa"],
+Cell[131050, 3139, 482, 7, 56, "Text",ExpressionUUID->"61a017df-8e43-4c9a-bd3d-51030f097ee2"],
+Cell[131535, 3148, 12523, 326, 1951, "Input",ExpressionUUID->"579d8fbb-f3bb-4a88-a7bb-e5b4b8dc271b"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[144095, 3479, 120, 0, 67, "Section",ExpressionUUID->"9054be2c-76e2-458f-a073-b9f78811911d"],
+Cell[144218, 3481, 1899, 47, 331, "Input",ExpressionUUID->"4f89b969-f564-49c6-be64-c63b021e9798"],
+Cell[146120, 3530, 595, 8, 78, "Text",ExpressionUUID->"05ca214f-eaae-41c0-862e-caf229d0447a"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
