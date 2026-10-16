@@ -33,13 +33,12 @@ These functions reuse the five-qubit notebook's existing experimental-data handl
 
 **Notebook:** `9qubit_S36_S10_corrected_full.nb`
 
-This notebook implements entanglement-depth bounds for a nine-qubit GHZ-state analysis. It uses supplementary **Eq. S36 and Eq. S10**, including partition construction, weighted exchange sets, and multiplicity handling. **There is no k-separability analysis in the GHZ module.**
+This notebook implements entanglement-depth bounds for a nine-qubit GHZ-state analysis. It uses supplementary **Eq. S36 and Eq. S10**, including partition construction, weighted exchange sets, and multiplicity handling. 
 
 The uploaded notebook includes:
 
-- Configurable nine-qubit settings, including `q9N = 9`, `q9J = 2`, and `q9H = 1`.
-- Experimental evolution times `q9Times = {0, 500, 1000, 1500, 3000, 6000, 10000}`.
-- Ten-repetition processing, `q9Repetitions = Range[10]`.
+
+- Experimental evolution times and repetition times.
 - Measurement-row configuration, data loading, and witness expectation values.
 - Depth-bound construction with supplementary Eqs. S36 and S10.
 - A unified criterion, summaries, example calls, and checks of partition enumeration and measurement-row layout.
@@ -48,7 +47,6 @@ The default local data root is configured with `q9Root`. Change it to your actua
 
 Relevant Mathematica functions in the notebook include `q9Case`, `q9Summary`, and `q9AllTimes`. Evaluate the initialization cells and consult the notebook's **“6. Examples”** and **“8. Run experiment calculations”** sections for their exact argument conventions before launching a complete dataset run.
 
-The original notebook notes that its witness sign/normalization and exchange-set counting should be checked when interpreting its results as certified entanglement depths. That qualification is retained here.
 
 ## 3. Nine-qubit cluster-state analysis
 
