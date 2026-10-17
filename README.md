@@ -7,7 +7,8 @@ Wolfram Mathematica notebooks for entanglement-depth analysis of five-qubit and 
 | System | Notebook | Implemented analyses |
 |---|---|---|
 | 5-qubit | `5qubit/5qubit_merged_S36_S10_k3_k4_separability.nb` | Entanglement depth (S36, S10); 3- and 4-separability |
-| 9-qubit GHZ | `9qubit-GHZ/9qubit_S36_S10_corrected_full.nb` | **Entanglement depth only (S36, S10); separability modules is the same as those in 9qubit-Cluster/CL9_9Q_4Y_S36_S11_k3_to_k8.nb |
+| 9-qubit GHZ | `9qubit-GHZ/9qubit_S36_S10_corrected_full.nb` | Entanglement depth only (S36, S10),j=2; separability modules is the same as those in 9qubit-Cluster/CL9_9Q_4Y_S36_S11_k3_to_k8.nb |Entanglement depth only (S36, S10),j=2
+| 9-qubit GHZ|`GHZ9_4Y_h4_FULL_original_based.nb'|
 | 9-qubit Cluster | `9qubit-Cluster/CL9_9Q_4Y_S36_S11_k3_to_k8.nb` | Entanglement depth (S36, S11); 3–8 separability |
 
 ```
@@ -31,9 +32,9 @@ These functions reuse the five-qubit notebook's existing experimental-data handl
 
 ## 2. Nine-qubit GHZ entanglement-depth analysis
 
-**Notebook:** `9qubit_S36_S10_corrected_full.nb`
+**Notebook:** `9qubit_S36_S10_corrected_full.nb` for j=2 inequalities;`GHZ9_4Y_h4_FULL_original_based.nb' for j=2 inequalities;
 
-This notebook implements entanglement-depth bounds for a nine-qubit GHZ-state analysis. It uses supplementary **Eq. S36 and Eq. S10**, including partition construction, weighted exchange sets, and multiplicity handling. 
+This notebook implements entanglement-depth bounds for a nine-qubit GHZ-state analysis. It uses supplementary **Eq. S36, Eq. S10 and Eq. S11**, including partition construction, weighted exchange sets, and multiplicity handling. 
 
 The uploaded notebook includes:
 
