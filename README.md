@@ -95,7 +95,7 @@ The cluster notebook uses Pauli codes `1 = X`, `2 = Y`, `3 = Z`; its 1-based mea
 
 ## Interpretation of LEFT and RIGHT
 
-Each implemented witness compares the left-hand side and right-hand side of its relevant supplementary inequality:
+Each implemented witness compares twice of the left-hand side and right-hand side of its relevant supplementary inequality:
 
 \[
 \Delta = \mathrm{LEFT} - \mathrm{RIGHT}.
