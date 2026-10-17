@@ -32,7 +32,7 @@ These functions reuse the five-qubit notebook's existing experimental-data handl
 
 ## 2. Nine-qubit GHZ entanglement-depth analysis
 
-**Notebook:** `9qubit_S36_S10_corrected_full.nb` for j=2 inequalities;`GHZ9_4Y_h4_FULL_original_based.nb' for j=2 inequalities;
+**Notebook:** `9qubit_S36_S10_corrected_full.nb` for j=2 inequalities;`GHZ9_4Y_h4_FULL_original_based.nb' for j=4 inequalities;
 
 This notebook implements entanglement-depth bounds for a nine-qubit GHZ-state analysis. It uses supplementary **Eq. S36, Eq. S10 and Eq. S11**, including partition construction, weighted exchange sets, and multiplicity handling. 
 
