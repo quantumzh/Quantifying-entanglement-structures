@@ -8,7 +8,7 @@ Wolfram Mathematica notebooks for entanglement-depth analysis of five-qubit and 
 |---|---|---|
 | 5-qubit | `5qubit/5qubit_merged_S36_S10_k3_k4_separability.nb` | Entanglement depth (S36, S10); 3- and 4-separability |
 | 9-qubit GHZ | `9qubit-GHZ/9qubit_S36_S10_corrected_full.nb` | Entanglement depth only (S36, S10),j=2; separability modules is the same as those in 9qubit-Cluster/CL9_9Q_4Y_S36_S11_k3_to_k8.nb |Entanglement depth only (S36, S10),j=2
-| 9-qubit GHZ|`GHZ9_4Y_h4_FULL_original_based.nb'|
+| 9-qubit GHZ| `GHZ9_4Y_h4_FULL_original_based.nb` |
 | 9-qubit Cluster | `9qubit-Cluster/CL9_9Q_4Y_S36_S11_k3_to_k8.nb` | Entanglement depth (S36, S11); 3–8 separability |
 
 ```
