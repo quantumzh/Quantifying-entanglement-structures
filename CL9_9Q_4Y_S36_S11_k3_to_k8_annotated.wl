@@ -272,10 +272,10 @@ oneS36[d_Integer,hh_Integer,corr_List,p_List]:=
    Return[Failure["BadInput",<||>]]];
  wv=allW[4,corr];f=fPaper[4,9];C=cDh[d,hh];
  pairPop=pairPopulation[p];den=Binomial[9,4]+f(C-1);
- left=N[C (Total[Abs[wv]]-2 f pairPop)/(2 den)];
+ left=N[C (Total[Abs[wv]]-2 f pairPop)/(den)];
  e=N[epsUpsilon[upsilonD[d,hh],p]];
  eh=N[epsUpsilon[hatUpsilon[d,hh],p]];
- right=N[e+f*C/den*eh];
+ right=N[2e+2f*C/den*eh];
  <|"d"->d,"h"->hh,
    "W(1,8)"->N[wv[[1]]],"W(2,7)"->N[wv[[2]]],
    "W(3,6)"->N[wv[[3]]],"W(4,5)"->N[wv[[4]]],
@@ -389,7 +389,7 @@ oneS11[d_Integer,corr_List,p_List] :=
       &&VectorQ[corr,NumericQ]&&VectorQ[p,NumericQ]),
    Return[Failure["BadS11Input",<||>]]];
   wv=allW[4,corr];
-  L=N[(Total[Abs[wv]]-28 pairPopulation[p])/252];
+  L=N[(Total[Abs[wv]]-28 pairPopulation[p])/126];
   e=N[epsGamma[referenceGamma1[],p]];
   eHat=N[epsGamma[gammaHatS11[d],p]];
   R=N[e+(1/9)eHat];
@@ -507,10 +507,10 @@ oneKS9[k_Integer,hh_Integer,corr_List,p_List] :=
   wv=allW[4,corr];
   C=kC9[k,hh];den=126+f(C-1);
   pairPop=pairPopulation[p];
-  left=N[C*(Total[Abs[wv]]-2 f pairPop)/(2den)];
+  left=N[C*(Total[Abs[wv]]-2 f pairPop)/(den)];
   e=N[epsUpsilon[kUpsilon9[k,hh],p]];
   eHat=N[epsUpsilon[kHat9[k,hh],p]];
-  right=N[e+(f C/den)*eHat];
+  right=N[2e+(2f C/den)*eHat];
   <|"k"->k,"h"->hh,"C_k_h"->C,"SumAbsW"->N[Total[Abs[wv]]],
     "Epsilon"->e,"EpsilonHat"->eHat,
     "LEFT"->left,"RIGHT"->right,
