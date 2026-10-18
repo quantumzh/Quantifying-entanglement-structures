@@ -251,13 +251,13 @@ Paper: C_d^h c_L <= c_R.
   Sum_Omega sqrt(p_m p_n)        -> pairPop
   epsilon_D^(Omega,h)           -> e  (IMPORTANT: Upsilon-based)
   epsilonHat_D^(Omega,h)        -> eh (complement Upsilon-based)
-  LEFT = C_d^h c_L              -> left
-  RIGHT = c_R                   -> right
+  LEFT =2 C_d^h c_L              -> twice of left
+  RIGHT =2 c_R                   -> twice of right
   LEFT-RIGHT                    -> Delta
   positive Delta                -> violation of the tested d-producible bound
 
-LEFT = C*(Sum_Omega Abs[W] - 2*f*pairPop)/(2*den).
-RIGHT = e + (f*C/den)*eh.
+LEFT = C*(Sum_Omega Abs[W] - 2*f*pairPop)/(den).
+RIGHT = 2e + (2f*C/den)*eh.
 If the code uses epsGamma in e, it must be corrected to epsUpsilon;
 this annotated edition retains only the S36 RHS correction already
 made in the previous edition.
@@ -391,7 +391,7 @@ oneS11[d_Integer,corr_List,p_List] :=
   L=N[(Total[Abs[wv]]-28 pairPopulation[p])/126];
   e=N[epsGamma[referenceGamma1[],p]];
   eHat=N[epsGamma[gammaHatS11[d],p]];
-  R=N[e+(1/9)eHat];
+  R=N[2e+(2/9)eHat];
   <|"d"->d,"Equation"->"S11","W(1,8)"->N[wv[[1]]],
    "W(2,7)"->N[wv[[2]]],"W(3,6)"->N[wv[[3]]],
    "W(4,5)"->N[wv[[4]]],
@@ -463,8 +463,8 @@ Paper: replace D_d^* by S_k^* and 1D reference by 1S reference.
   allRepeatedKS9            -> all experimental repetitions
 
 LEFT=C_k^h*(SumOmega|W|-28*PairPopulation)/
-                  (252+28(C_k^h-1)).
-RIGHT=epsilon_kS + 14*C_k^h/(126+14(C_k^h-1))*epsilonHat_kS.
+                  (126+14(C_k^h-1)).
+RIGHT=2epsilon_kS + 28*C_k^h/(126+14(C_k^h-1))*epsilonHat_kS.
 For k-separability this is a DIFFERENT question than entanglement
 depth d. k=3..8 denotes number of tensor-product blocks.
 *)
