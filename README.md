@@ -7,8 +7,8 @@ Wolfram Mathematica notebooks for entanglement-depth analysis of five-qubit and 
 | System | Notebook | Implemented analyses |
 |---|---|---|
 | 5-qubit | `5qubit/5qubit_merged_S36_S10_k3_k4_separability.nb` | Entanglement depth (S36, S10); 3- and 4-separability |
-| 9-qubit GHZ | `9qubit-GHZ/9qubit_S36_S10_corrected_full.nb` | Entanglement depth only (S36, S10),j=2; separability modules is the same as those in 9qubit-Cluster/CL9_9Q_4Y_S36_S11_k3_to_k8.nb |Entanglement depth only (S36, S10),j=2
-| 9-qubit GHZ| `GHZ9_4Y_h4_FULL_original_based.nb` |
+| 9-qubit GHZ | `9qubit-GHZ/GHZ9_S36_S10_2Y.nb` | Entanglement depth only (S36, S10),j=2; separability modules is the same as those in 9qubit-Cluster/CL9_9Q_4Y_S36_S11_k3_to_k8.nb |
+| 9-qubit GHZ| `GHZ9_4Y_h4.nb` | Entanglement structures (S10,S11 and S36),j=4, h can be set to various values, ranging from 1 to 4|
 | 9-qubit Cluster | `9qubit-Cluster/CL9_9Q_4Y_S36_S11_k3_to_k8.nb` | Entanglement depth (S36, S11); 3–8 separability |
 
 ```
@@ -32,7 +32,7 @@ These functions reuse the five-qubit notebook's existing experimental-data handl
 
 ## 2. Nine-qubit GHZ entanglement-depth analysis
 
-**Notebook:** `9qubit_S36_S10_corrected_full.nb` for j=2 inequalities;`GHZ9_4Y_h4_FULL_original_based.nb' for j=4 inequalities;
+**Notebook:** GHZ9_S36_S10_2Y.nb` for j=2 inequalities;`GHZ9_4Y_h4.nb' for j=4 inequalities;
 
 This notebook implements entanglement-depth bounds for a nine-qubit GHZ-state analysis. It uses supplementary **Eq. S36, Eq. S10 and Eq. S11**, including partition construction, weighted exchange sets, and multiplicity handling. 
 
@@ -41,12 +41,12 @@ The uploaded notebook includes:
 
 - Experimental evolution times and repetition times.
 - Measurement-row configuration, data loading, and witness expectation values.
-- Depth-bound construction with supplementary Eqs. S36 and S10.
+- The inequalities construction with supplementary Eqs. S10, S11 and S36.
 - A unified criterion, summaries, example calls, and checks of partition enumeration and measurement-row layout.
 
-The default local data root is configured with `q9Root`. Change it to your actual experimental directory before running. The notebook uses `q9ExperimentFolder[time]` to name evolution-time folders such as `9Q_GHZ_1500ns`, along with the configured readout subdirectory and `basis_measurement` file prefix.
+The default local data root is configured with `baseDirGHZ`. Change it to your actual experimental directory before running. The notebook uses `experimentFolderGHZ[time]` to name evolution-time folders such as `9Q_GHZ_1500ns`, along with the configured readout subdirectory and `basis_measurement` file prefix.
 
-Relevant Mathematica functions in the notebook include `q9Case`, `q9Summary`, and `q9AllTimes`. Evaluate the initialization cells and consult the notebook's **“6. Examples”** and **“8. Run experiment calculations”** sections for their exact argument conventions before launching a complete dataset run.
+Relevant Mathematica functions in the notebook include `caseGHZ`, `summaryGHZ`, and `allTimesGHZ`. Evaluate the initialization cells before running the experiment calculations to ensure that all parameters, functions, and data paths are properly defined
 
 
 ## 3. Nine-qubit cluster-state analysis
@@ -74,7 +74,7 @@ where the indices enumerate the eight computational-basis terms above.
 
 Its analysis covers:
 
-- **Entanglement-depth criteria:** S36 for \(d=1,\ldots,4\), S11 for \(d=5,\ldots,9\).
+- **Entanglement-depth criteria:** S36 for \(d=1,\ldots,4\), S10 or S11 for \(d=5,\ldots,9\).
 - **Separability criteria:** \(k=3,\ldots,8\).
 - **Four-\(Y\) witnesses:** 126 measured Pauli strings with four \(Y\) and five \(X\) factors.
 - Weighted swap-set operations, computational-basis populations, and per-repetition comparisons.
@@ -90,19 +90,13 @@ allKS9[2, idealCorr, idealP]
 depthResults = allRepetitionsBoth[folders, 2];
 separabilityResults = allRepeatedKS9[folders, 2];
 ```
-
-The cluster notebook uses Pauli codes `1 = X`, `2 = Y`, `3 = Z`; its 1-based measurement row 340 is the all-\(Z\) basis. It expects `basis_measurement0.txt` through `basis_measurement340.txt` for each repetition, with 512 outcomes per measurement setting.
+The cluster notebook uses Pauli codes `1 = X`, `2 = Y`, `3 = Z`; its 1-based measurement row 340 is the all-\(Z\) basis. It expects `basis_measurement0.txt` through `basis_measurement340.txt` for each repetition, with 512 outcomes per measurement setting. Detailed explanations and code annotations for CL9_9Q_4Y_S36_S11_k3_to_k8.nb are provided in the accompanying Wolfram Language file, CL9_9Q_4Y_S36_S11_k3_to_k8.wl.
 
 ## Interpretation of LEFT and RIGHT
 
 Each implemented witness compares twice of the left-hand side and right-hand side of its relevant supplementary inequality:
 
-\[
-\Delta = \mathrm{LEFT} - \mathrm{RIGHT}.
-\]
-
-When \(\Delta>0\), the corresponding bound is violated **subject to the assumptions of that specific criterion and the correctness of its implementation**. Entanglement depth and \(k\)-separability are different physical classifications.
-
+When \(\Delta>0\), the corresponding bound is violated **subject to the assumptions of that specific criterion and the correctness of its implementation**. 
 The S10/S11/S36 branches and the \(k\)-separability extensions should not be treated as interchangeable just because their output tables share `LEFT`, `RIGHT`, and `Delta` labels.
 
 ## Running and reproducibility
@@ -119,6 +113,4 @@ All experiment paths in the notebooks refer to local files; data are not include
 
 ## References and license
 
-The notebooks refer to supplementary **Eqs. S10, S11, S36 and Notations S3–S6**. Please add the source paper's complete bibliographic reference and DOI.
-
-No redistribution license is asserted here. Add a `LICENSE` file if you want to grant reuse permissions.
+The notebooks refer to supplementary **Eqs. S10, S11, S36 and Notations S3–S6** of the paper titled "Experimentally Quantifying Entanglement Structures with Polynomial Number of Measurements".
