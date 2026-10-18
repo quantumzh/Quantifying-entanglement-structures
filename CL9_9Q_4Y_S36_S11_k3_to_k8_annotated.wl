@@ -20,8 +20,8 @@ Paper correspondence:
   pauliCodes[j]            -> nine-entry local Pauli strings, lexicographic order
   rowCodes[row]            -> observed Pauli string on that row
 
-IMPORTANT: the originally named first group contains EIGHT Ys and is
-stored as rowsByY[8]. Original row r corresponds to file
+IMPORTANT: the  group contains EIGHT Ys and is
+stored as rowsByY[8]. row r corresponds to file
 basis_measurement(r-1).txt. row 340 is Z^tensor9.
 *)
 
