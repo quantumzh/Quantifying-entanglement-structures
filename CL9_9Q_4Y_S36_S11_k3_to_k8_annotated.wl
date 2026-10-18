@@ -53,7 +53,7 @@ Print["Four pairs: ",omega//InputForm];
 (*
 SECTION 2 | Import local 341 measurement files / repetition
   folders                  -> 10 separately acquired experimental runs
-  loadRep[folder]          -> 341 settings x 512 outcomes (or Failure)
+  loadRep[folder]          -> 341 settings x 512 outcomes (or Failure). When detecting the entanglement structure, we used only  measurements composed of four Y's.
   probabilities[measure]   -> normalized 512-outcome distribution of one setting
   correlators[block]       -> corr[[row]] = <P_row> = parity-weighted sum of outcomes
   computationalProbabilities -> p_b = <b|rho|b> from all-Z setting
