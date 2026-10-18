@@ -5,7 +5,6 @@
 (* Includes S36 d=1..4, S11 d=5..9, k-separability k=3..8. *)
 (* File paths for real experimental data must be configured locally. *)
 (* Run with Get["path/to/CL9_9Q_4Y_S36_S11_k3_to_k8.wl"]. *)
-(* NOTE: Mathematical implementations retained; corrected two S36 output field labels to Upsilon. Not kernel-validated. *)
 
 (* ==== Input cell 1 ==== *)
 (*
