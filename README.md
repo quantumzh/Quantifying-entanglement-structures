@@ -17,16 +17,11 @@ Wolfram Mathematica notebooks for entanglement-depth analysis of five-qubit and 
 
 The five-qubit notebook contains entanglement-depth and 3-separability and 4-separability criteria from supplementary Eqs. **S36** and **S10**.
 
-```
-Example commands for the added separability routines:
-
 ```mathematica
-paper5KSTenRepeats[1500, 3, 1]
-paper5KSTenRepeats[1500, 4, 1]
+TenRepeatsGHZ5[500, 1]
 
 (* h = 2 *)
-paper5KSTenRepeats[1500, 3, 2]
-paper5KSTenRepeats[1500, 4, 2]
+TenReaptsGHZ5[500, 2]
 ```
 
 These functions reuse the five-qubit notebook's existing experimental-data handling and exchange-set machinery.
