@@ -22,7 +22,7 @@ The five-qubit notebook contains entanglement-depth and 3-separability and 4-sep
 TenRepeatsGHZ5[500, 1]
 
 (* d = 2 *)
-TenReaptsGHZ5[500, 2]
+TenRepeatsGHZ5[500, 2]
 ```
 
 These functions reuse the five-qubit notebook's existing experimental-data handling and exchange-set machinery.
