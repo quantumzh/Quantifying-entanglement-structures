@@ -11,12 +11,13 @@ Wolfram Mathematica notebooks for entanglement-depth analysis of five-qubit and 
 | 9-qubit GHZ| `GHZ9_4Y_h4.nb` | Entanglement structures (S10,S11 and S36),j=4, h can be set to various values, ranging from 1 to 4|
 | 9-qubit Cluster | `CL9_9Q_4Y_S36_S11_k3_to_k8.nb` | Entanglement depth (S36, S11); 3–8 separability. Detailed explanations and code annotations are in CL9_9Q_4Y_S36_S11_k3_to_k8_annotated.wl  |
 
-```
+
 
 ## 1. Five-qubit analysis
 
 The five-qubit notebook contains entanglement-depth criteria from supplementary Eqs. **S36** and **S10**. It additionally implements **3-separability and 4-separability** using weighted exchange-set constructions.
 
+```
 Example commands for the added separability routines:
 
 ```mathematica
