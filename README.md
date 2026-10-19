@@ -18,9 +18,10 @@ Wolfram Mathematica notebooks for entanglement-depth analysis of five-qubit and 
 The five-qubit notebook contains entanglement-depth and 3-separability and 4-separability criteria from supplementary Eqs. **S36** and **S10**.
 
 ```mathematica
+(* d = 1 *)
 TenRepeatsGHZ5[500, 1]
 
-(* h = 2 *)
+(* d = 2 *)
 TenReaptsGHZ5[500, 2]
 ```
 
