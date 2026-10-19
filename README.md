@@ -107,7 +107,7 @@ The S10/S11/S36 branches and the \(k\)-separability extensions should not be tre
 4. Run a verified reference example before processing a complete experimental dataset.
 5. Record `LEFT`, `RIGHT`, the difference, and the setting parameters for reproducibility.
 
-All experiment paths in the notebooks refer to local files; data are not included automatically. Avoid publishing confidential data and machine-specific file paths unintentionally.
+All experiment paths in the notebooks refer to local files; Raw data are not included due to file size and lab data-sharing restrictions.
 
 
 
